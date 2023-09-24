@@ -1,0 +1,4 @@
+<?php
+return [
+    "already_registered_email" => "This email is already registered"
+];

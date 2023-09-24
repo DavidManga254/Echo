@@ -14,6 +14,11 @@ return new class extends Migration
         Schema::create('register_users', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('first_name');
+            $table->string('second_name');
+            $table->string('email');
+            $table->string('password');
+            $table->string('token');
         });
     }
 
