@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SignUp\SignUpMail;
+use App\Http\Requests\signup\RegisterUserRequest;
+use App\Models\User;
+use Carbon\Carbon;
 
 class SignUpController extends Controller
 {
@@ -36,11 +39,34 @@ class SignUpController extends Controller
             $newUserToRegister->save();
 
 
-            Mail::to($userEmail)->send(new SignUpMail($newUserToRegister->token));
+            Mail::to($userEmail)->send(new SignUpMail($newUserToRegister->token, $newUserToRegister->email));
 
             return response()->json(ApiHelper::success(message: config('emails.verification_email_sent')));
         } else {
             return response()->json(ApiHelper::error(errorMessage: config('apierrormessages.email_already_taken')));
+        }
+    }
+    public function registerUser(RegisterUserRequest $request, $token)
+    {
+        $userEmail = $request->input('email');
+
+        $userWaitingForConfirmation = RegisterUser::where('email', $userEmail)->first();
+
+        if ($userWaitingForConfirmation->email == $userEmail && $userWaitingForConfirmation->token == $token) {
+            $newRegisteredUser = new User();
+
+            $newRegisteredUser->name = "$userWaitingForConfirmation->firstname  $userWaitingForConfirmation->secondname";
+            $newRegisteredUser->email = $userWaitingForConfirmation->email;
+            $newRegisteredUser->email_verified_at = Carbon::now();
+            $newRegisteredUser->password = $userWaitingForConfirmation->password;
+
+            $newRegisteredUser->save();
+
+            $userWaitingForConfirmation->delete();
+
+            return response()->json(ApiHelper::success(message: config('usermessages.sign_up_successful')));
+        } else {
+            return response()->json(Apihelper::error(message: config('apierrormessages.invalid_credentials')));
         }
     }
 }

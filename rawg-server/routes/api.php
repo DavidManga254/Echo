@@ -19,8 +19,6 @@ use App\Http\Controllers\DataController;
 //     return $request->user();
 // });
 
-// Route::get('/keeper', [DataController::class, 'index']);
-
 /*
 |--------------------------------------------------------------------------
 | None protected routes
@@ -29,4 +27,5 @@ use App\Http\Controllers\DataController;
 
 Route::group(['namespace' => 'App\Http\Controllers\signup'], function () {
     Route::post('/signup', 'SignupController@index');
+    Route::post('signup/confirmEmail/{token}', 'SignUpController@registerUser');
 });

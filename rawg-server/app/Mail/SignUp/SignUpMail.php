@@ -18,6 +18,7 @@ class SignUpMail extends Mailable
      */
     public function __construct(
         public $signUpToken,
+        public $email
     ) {
         //
     }
