@@ -17,6 +17,7 @@ class Datacontroller extends Controller
     //
     public function index(Request $request)
     {
+        dd('jelle');
         // $client = new \GuzzleHttp\Client(['verify' => false]);
         // $URL = $request->query('url');
         // $key = $request->query('key');

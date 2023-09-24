@@ -15,8 +15,18 @@ use App\Http\Controllers\DataController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::get('/keep',[DataController::class,'index']);
+// Route::get('/keeper', [DataController::class, 'index']);
+
+/*
+|--------------------------------------------------------------------------
+| None protected routes
+|--------------------------------------------------------------------------
+*/
+
+Route::group(['namespace' => 'App\Http\Controllers\signup'], function () {
+    Route::post('/signup', 'SignupController@index');
+});
