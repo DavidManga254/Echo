@@ -25,9 +25,10 @@ class SignUpController extends Controller
         $userSecondName = $request->input('secondname');
         $userPassword = $request->input('password');
 
-        $doesUserExist = RegisterUser::where('email', $userEmail)->count();
+        $doesUserExistInWait = RegisterUser::where('email', $userEmail)->count();
+        $isUserAlreadyRegisterd = User::where('email', $userEmail)->count();
 
-        if ($doesUserExist == 0) {
+        if ($doesUserExistInWait == 0 && $isUserAlreadyRegisterd == 0) {
             $newUserToRegister = new RegisterUser();
 
             $newUserToRegister->first_name = $userFirstName;

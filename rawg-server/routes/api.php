@@ -25,7 +25,11 @@ use App\Http\Controllers\DataController;
 |--------------------------------------------------------------------------
 */
 
+//Signup routes
 Route::group(['namespace' => 'App\Http\Controllers\signup'], function () {
     Route::post('/signup', 'SignupController@index');
     Route::post('signup/confirmEmail/{token}', 'SignUpController@registerUser');
 });
+
+//login route
+Route::post('/login', 'App\Http\Controllers\login\LoginController@index');
