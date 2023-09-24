@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 class ApiHelper
 {
-    public static function success($data = [], $message = "Request successful", $errorMessage)
+    public static function success($data = [], $message = "Request successful", $errorMessage = '')
     {
         return [
             "status" => "success",
@@ -15,7 +15,7 @@ class ApiHelper
         ];
     }
 
-    public static function error($message = "Request failed", $errors = [], $errorMessage)
+    public static function error($message = "Request failed", $errors = [], $errorMessage = '')
     {
         return [
             "status" => "error",

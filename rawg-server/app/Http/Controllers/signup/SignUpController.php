@@ -9,6 +9,8 @@ use App\Models\RegisterUser\RegisterUser;
 use App\Helpers\ApiHelper;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SignUp\SignUpMail;
 
 class SignUpController extends Controller
 {
@@ -22,7 +24,7 @@ class SignUpController extends Controller
 
         $doesUserExist = RegisterUser::where('email', $userEmail)->count();
 
-        if ($doesUserExist != 0) {
+        if ($doesUserExist == 0) {
             $newUserToRegister = new RegisterUser();
 
             $newUserToRegister->first_name = $userFirstName;
@@ -32,8 +34,13 @@ class SignUpController extends Controller
             $newUserToRegister->token = Str::random(40);
 
             $newUserToRegister->save();
+
+
+            Mail::to($userEmail)->send(new SignUpMail($newUserToRegister->token));
+
+            return response()->json(ApiHelper::success(message: config('emails.verification_email_sent')));
         } else {
-            return response()->json(ApiHelper::error(errorMessage: config('apiErrorMessages.already_registered_email')));
+            return response()->json(ApiHelper::error(errorMessage: config('apierrormessages.email_already_taken')));
         }
     }
 }
