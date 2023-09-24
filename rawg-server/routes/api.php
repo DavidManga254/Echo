@@ -33,3 +33,14 @@ Route::group(['namespace' => 'App\Http\Controllers\signup'], function () {
 
 //login route
 Route::post('/login', 'App\Http\Controllers\login\LoginController@index');
+
+/*
+|--------------------------------------------------------------------------
+| protected routes
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('auth:api')->group(function () {
+
+    Route::get('/games/{page}', 'App\Http\Controllers\GamesController\GamesController@index');
+});
