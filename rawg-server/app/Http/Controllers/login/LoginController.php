@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
-    //
+
     public function index(LoginRequest $request)
     {
         $userEmail = $request->input('email');
