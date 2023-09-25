@@ -1,3 +1,15 @@
+import { TopAppBar } from '../../common/appBar/appBar';
+
 export function HomePage() {
-    return <p>{import.meta.env.VITE_API_BASE_URL}</p>;
+    return (
+        <div className="bg-red-500">
+            <div>
+                <TopAppBar />
+            </div>
+            <div>
+                <div>{/* sidebar */}</div>
+                <div>{/* rendering screens */}</div>
+            </div>
+        </div>
+    );
 }
