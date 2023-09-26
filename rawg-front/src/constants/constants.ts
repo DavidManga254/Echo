@@ -3,5 +3,7 @@ interface constantInterface {
 }
 
 export const appConstants: constantInterface = {
-    searchGamesPlaceHolder: 'Search games',
+    search_games_placeHolder: 'Search games',
+    sign_up: 'SIGN UP',
+    sign_in: 'SIGN IN',
 };

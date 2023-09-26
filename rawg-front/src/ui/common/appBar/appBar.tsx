@@ -10,7 +10,7 @@ export function TopAppBar() {
                 <form className="w-full flex justify-center">
                     <input
                         placeholder={
-                            appConstants.searchGamesPlaceHolder
+                            appConstants.search_games_placeHolder
                         }
                         className="w-full bg-gray-200 rounded-3xl p-2 sm:p-1 focus:bg-white border-0"
                         type="text"
@@ -23,10 +23,10 @@ export function TopAppBar() {
                 </div>
                 <div className="sm:hidden text-white  md:inline-flex flex w-full justify-between h-full items-center font-sans font-semibold">
                     <div>
-                        <p>SIGN IN</p>
+                        <p>{appConstants.sign_in}</p>
                     </div>
                     <div>
-                        <p>SIGN UP</p>
+                        <p>{appConstants.sign_up}</p>
                     </div>
                 </div>
             </div>
