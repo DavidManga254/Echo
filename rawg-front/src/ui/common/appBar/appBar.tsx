@@ -1,6 +1,12 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import { appConstants } from '../../../constants/constants';
+import { Drawer } from '@mui/material';
+import { useState } from 'react';
+import { SideBar } from '../sideBar/sideBar';
+
 export function TopAppBar() {
+    const [isDrawerOpen, setDrawerState] = useState(false);
+
     return (
         <div className="bg-blue-500 flex justify-between p-3">
             <div className="md:w-[10%] flex items-center flex-row font-sans font-bold md:text-3xl sm:text-lg text-white">
@@ -19,7 +25,22 @@ export function TopAppBar() {
             </div>
             <div className="md:w-[10%] ">
                 <div className="sm:inline md:hidden text-white text-lg">
-                    <MenuIcon />
+                    <MenuIcon
+                        onClick={() =>
+                            setDrawerState((previous) => !previous)
+                        }
+                    />
+                    <Drawer
+                        open={isDrawerOpen}
+                        anchor="right"
+                        onClick={() =>
+                            setDrawerState((previous) => !previous)
+                        }
+                    >
+                        <div className="w-[50vw]">
+                            <SideBar />
+                        </div>
+                    </Drawer>
                 </div>
                 <div className="sm:hidden text-white  md:inline-flex flex w-full justify-between h-full items-center font-sans font-semibold">
                     <div>
