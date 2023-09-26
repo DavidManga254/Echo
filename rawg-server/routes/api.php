@@ -43,4 +43,5 @@ Route::post('/login', 'App\Http\Controllers\login\LoginController@index');
 Route::middleware('auth:api')->group(function () {
 
     Route::get('/games/{page}', 'App\Http\Controllers\GamesController\GamesController@index');
+    Route::get('/david/{page}', 'App\Http\Controllers\GamesController\GamesController@index');
 });
