@@ -1,15 +1,14 @@
-import { TopAppBar } from '../../common/appBar/appBar';
-
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 export function HomePage() {
     return (
-        <div className="bg-red-500">
+        <div>
             <div>
-                <TopAppBar />
+                <h2 className="text-lg">New and trending</h2>
+                <p>Based on player counts and release date</p>
             </div>
-            <div>
-                <div>{/* sidebar */}</div>
-                <div>{/* rendering screens */}</div>
-            </div>
+            <button className="p-1 bg-gray-700 text-white sm:mt-2 rounded-md">
+                Order by <KeyboardArrowDownIcon />
+            </button>
         </div>
     );
 }

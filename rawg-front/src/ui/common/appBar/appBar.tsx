@@ -8,7 +8,7 @@ export function TopAppBar() {
     const [isDrawerOpen, setDrawerState] = useState(false);
 
     return (
-        <div className="bg-blue-500 flex justify-between p-3">
+        <div className="flex justify-between p-3 text-white">
             <div className="md:w-[10%] flex items-center flex-row font-sans font-bold md:text-3xl sm:text-lg text-white">
                 RAWG
             </div>

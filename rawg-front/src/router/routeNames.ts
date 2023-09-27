@@ -4,6 +4,7 @@ interface RouteInterFace {
 
 const routeNames: RouteInterFace = {
     home: '/',
+    homePage: 'home',
 };
 
 export { routeNames };

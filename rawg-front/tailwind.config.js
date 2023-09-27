@@ -7,6 +7,9 @@ export default {
             md: '768px',
             lg: '1024px',
         },
+        // colors: {
+        //     // background: 'rgb(21,21,21)',
+        // },
         extend: {},
     },
     plugins: [],
