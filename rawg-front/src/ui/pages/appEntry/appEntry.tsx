@@ -9,7 +9,7 @@ export function AppEntry() {
             </div>
             <div>
                 <div>{/* sidebar */}</div>
-                <div className="sm:p-2">
+                <div className="sm:p-2 text-white">
                     <Outlet />
                 </div>
             </div>
