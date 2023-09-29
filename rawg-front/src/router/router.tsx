@@ -1,16 +1,20 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { HomePage } from '../ui/pages/homePage/homepage';
-import { routeNames } from './routeNames';
 import { AppEntry } from '../ui/pages/appEntry/appEntry';
+import { GameDetails } from '../ui/pages/gameDetailsPage/gameDetailsPage';
 
 const router = createBrowserRouter([
     {
-        path: routeNames.home,
+        path: '/',
         element: <AppEntry />,
         children: [
             {
-                path: routeNames.homePage,
+                path: '/',
                 element: <HomePage />,
+            },
+            {
+                path: 'games/:gameSlug',
+                element: <GameDetails />,
             },
         ],
     },
