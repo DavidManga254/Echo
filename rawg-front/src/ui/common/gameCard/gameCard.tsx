@@ -15,7 +15,7 @@ export function GameCard(props: {
     const [display, setDisplay] = useState(false);
 
     return (
-        <div className="rounded-xl bg-[#282727] mb-4 overflow-hidden">
+        <div className="rounded-xl bg-[#282727] mb-4 overflow-hidden lg:max-w-[23.5%] lg:mr-4">
             <div className="w-full">
                 <img
                     className="w-full"
@@ -76,7 +76,7 @@ export function GameCard(props: {
                         ) : null}
                     </TransitionGroup>
                 </div>
-                <div className="flex justify-center text-sm mb-3">
+                <div className="flex justify-center text-sm mb-3 lg:hidden">
                     {display ? (
                         <p
                             onClick={() => setDisplay(!display)}
