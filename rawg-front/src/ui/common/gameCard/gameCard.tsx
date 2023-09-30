@@ -15,7 +15,7 @@ export function GameCard(props: {
     const [display, setDisplay] = useState(false);
 
     return (
-        <div className="rounded-xl bg-[#282727] mb-4 overflow-hidden lg:max-w-[23.5%] lg:mr-4">
+        <div className="rounded-xl bg-[#282727] mb-4 overflow-hidden lg:max-w-[22.5%] lg:mr-4">
             <div className="w-full">
                 <img
                     className="w-full"
@@ -24,7 +24,7 @@ export function GameCard(props: {
             </div>
             <div className="p-2">
                 <div className="mb-2">
-                    <h2 className="fon font-bold sm:text-2xl">
+                    <h2 className="fon font-bold sm:text-2xl md:text-base">
                         Vampire: The Masquerade - Bloodlines 2
                     </h2>
                 </div>

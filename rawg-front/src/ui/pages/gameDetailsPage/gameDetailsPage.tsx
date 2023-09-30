@@ -1,7 +1,12 @@
 import { GameCard } from '../../common/gameCard/gameCard';
 import ModeCommentRoundedIcon from '@mui/icons-material/ModeCommentRounded';
 import { ShowMoreText } from '../../common/textExpand/textExpand';
+import Backdrop from '@mui/material/Backdrop';
+import { useState } from 'react';
+
 export function GameDetails() {
+    const [isbackDropOpen, setBackdropState] = useState(false);
+    const [backDropImageUrl, setBackDropImageUrl] = useState('');
     return (
         <div>
             <div>
@@ -11,6 +16,17 @@ export function GameDetails() {
                         <p className="sm:text-center text-xs sm:mb-4 text-gray-400">
                             HOME/GAMES/BALDUR'S GATE III
                         </p>
+                        <Backdrop
+                            open={isbackDropOpen}
+                            onClick={() =>
+                                setBackdropState(!isbackDropOpen)
+                            }
+                        >
+                            <img
+                                className="w-[70%]"
+                                src={backDropImageUrl}
+                            />
+                        </Backdrop>
                         <div className="flex flex-row justify-center sm:mb-7 ">
                             <button className="sm:text-xs text-black bg-white rounded p-1 font-semibold">
                                 AUG 3,2023
@@ -24,19 +40,25 @@ export function GameDetails() {
                     </div>
                     <div className="sm:flex sm:flex-row sm:flex-wrap sm:mb-5">
                         <img
-                            className="w-[47.5%] m-1"
+                            onClick={() => {
+                                setBackDropImageUrl(
+                                    'https://media.rawg.io/media/resize/200/-/screenshots/a67/a676cdec0eadc42a133ac49e7f2e1aac.jpg',
+                                );
+                                setBackdropState(!isbackDropOpen);
+                            }}
+                            className="w-[48.5%] m-0.5"
                             src="https://media.rawg.io/media/resize/200/-/screenshots/a67/a676cdec0eadc42a133ac49e7f2e1aac.jpg"
                         />
                         <img
-                            className="w-[47.5%] m-1"
+                            className="w-[48.5%] m-0.5"
                             src="https://media.rawg.io/media/resize/200/-/screenshots/a67/a676cdec0eadc42a133ac49e7f2e1aac.jpg"
                         />
                         <img
-                            className="w-[47.5%] m-1"
+                            className="w-[48.5%] m-0.5"
                             src="https://media.rawg.io/media/resize/200/-/screenshots/a67/a676cdec0eadc42a133ac49e7f2e1aac.jpg"
                         />
                         <img
-                            className="w-[47.5%] m-1"
+                            className="w-[48.5%] m-0.5"
                             src="https://media.rawg.io/media/resize/200/-/screenshots/a67/a676cdec0eadc42a133ac49e7f2e1aac.jpg"
                         />
                     </div>
@@ -116,7 +138,7 @@ export function GameDetails() {
                     <div className="flex flex-row justify-between mt-4">
                         <div className="w-1/2">
                             <div className="mb-2">
-                                <h4 className="text-[#474747] font-semibold">
+                                <h4 className="text-[#474747] font-semibold mb-1">
                                     plartforms
                                 </h4>
                                 <div className="flex flex-wrap">
@@ -131,7 +153,7 @@ export function GameDetails() {
                         </div>
                         <div className="w-1/2">
                             <div>
-                                <h4 className="text-[#474747] font-semibold">
+                                <h4 className="text-[#474747] font-semibold mb-1">
                                     Metascore
                                 </h4>
                                 <button className=" border-green-500 p-1 text-green-500 border-solid border-2 aspect-square rounded sm:text-sm">
@@ -140,8 +162,10 @@ export function GameDetails() {
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <h3>Tags</h3>
+                    <div className="mt-3">
+                        <h3 className="text-[#474747] font-semibold mb-1">
+                            Tags
+                        </h3>
                     </div>
                 </div>
                 <div>
@@ -155,15 +179,17 @@ export function GameDetails() {
             </div>
             <div>
                 <div>
-                    <h2>More games like</h2>
-                    <div>
+                    <h2 className="text-center sm:mb-3 lg:mb-6">
+                        More games like
+                    </h2>
+                    <div className="md:flex md:flex-wrap md:flex-row">
                         <GameCard />
                         <GameCard />
                         <GameCard />
                         <GameCard />
                         <GameCard />
                         <GameCard />
-                        <GameCard />2
+                        <GameCard />
                     </div>
                 </div>
             </div>
