@@ -17,7 +17,7 @@ class Datacontroller extends Controller
     //
     public function index(Request $request)
     {
-        dd('jelle');
+        // dd('jelle');
         // $client = new \GuzzleHttp\Client(['verify' => false]);
         // $URL = $request->query('url');
         // $key = $request->query('key');
@@ -26,7 +26,7 @@ class Datacontroller extends Controller
         // dd($urll);
         set_time_limit(0);
         $x = 0;
-        $page = 38;
+        $page = 1;
 
         while ($x < 100) {
             $page++;
@@ -39,6 +39,7 @@ class Datacontroller extends Controller
 
                 foreach ($list as $game) {
                     $gameCount = Game::where('slug', $game->slug)->count();
+                    $newGame = null;
                     if ($gameCount == 0) {
                         $newGame = new Game();
 
@@ -56,13 +57,13 @@ class Datacontroller extends Controller
                         foreach ($platform as $daPlatform) {
                             $platformCount = Plartform::where('platform_id', $daPlatform->platform->id)->count();
                             if ($platformCount == 0) {
-                                $newGame = new Plartform();
+                                $platform = new Plartform();
 
-                                $newGame->platform_id = $daPlatform->platform->id;
-                                $newGame->slug = $daPlatform->platform->slug;
-                                $newGame->name = $daPlatform->platform->name;
-
-                                $newGame->save();
+                                $platform->platform_id = $daPlatform->platform->id;
+                                $platform->slug = $daPlatform->platform->slug;
+                                $platform->name = $daPlatform->platform->name;
+                                $platform->save();
+                                $newGame->platforms()->attach($platform);
                             }
                         }
                     }
@@ -80,6 +81,8 @@ class Datacontroller extends Controller
                                 $newG->slug = $g->slug;
 
                                 $newG->save();
+
+                                $newGame->genre()->attach($newG);
                             }
                         }
                     }
@@ -99,6 +102,8 @@ class Datacontroller extends Controller
                                 $newG->image_background = $g->image_background;
 
                                 $newG->save();
+
+                                $newGame->tags()->attach($newG);
                             }
                         }
                     }
@@ -116,6 +121,7 @@ class Datacontroller extends Controller
                                 $newG->image = $g->image;
 
                                 $newG->save();
+                                $newGame->screenshots()->attach($newG);
                             }
                         }
                     }
@@ -133,6 +139,7 @@ class Datacontroller extends Controller
                                 $newG->name = $g->store->name;
 
                                 $newG->save();
+                                $newGame->stores()->attach($newG);
                             }
                         }
                     }

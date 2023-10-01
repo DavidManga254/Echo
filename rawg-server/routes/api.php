@@ -15,9 +15,12 @@ use App\Http\Controllers\DataController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::get('/insert', 'App\Http\Controllers\DataController@index');
+
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 /*
 |--------------------------------------------------------------------------
