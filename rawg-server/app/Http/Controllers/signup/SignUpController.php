@@ -56,10 +56,14 @@ class SignUpController extends Controller
         if ($userWaitingForConfirmation->email == $userEmail && $userWaitingForConfirmation->token == $token) {
             $newRegisteredUser = new User();
 
-            $newRegisteredUser->name = "$userWaitingForConfirmation->firstname  $userWaitingForConfirmation->secondname";
+            $firstName = $userWaitingForConfirmation->first_name;
+            $secondName = $userWaitingForConfirmation->second_name;
+            $newRegisteredUser->name = "$firstName $secondName";
             $newRegisteredUser->email = $userWaitingForConfirmation->email;
             $newRegisteredUser->email_verified_at = Carbon::now();
             $newRegisteredUser->password = $userWaitingForConfirmation->password;
+            $newRegisteredUser->user_id = Str::uuid();
+            $newRegisteredUser->api_token = hash('sha256', Str::random(40));
 
             $newRegisteredUser->save();
 

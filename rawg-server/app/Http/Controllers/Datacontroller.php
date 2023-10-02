@@ -28,7 +28,7 @@ class Datacontroller extends Controller
         $x = 0;
         $page = 1;
 
-        while ($x < 100) {
+        while ($x < 150) {
             $page++;
             $response = Http::withoutVerifying()->get("https://api.rawg.io/api/games?dates=2010-09-23%2C2023-09-23&key=c57b0e1d3bc043baa85da898e34888b2&page=$page&page_size=1000");
 
@@ -52,100 +52,123 @@ class Datacontroller extends Controller
 
                         $newGame->save();
                     }
-                    $platform = $game->platforms;
-                    if ($platform != null) {
-                        foreach ($platform as $daPlatform) {
-                            $platformCount = Plartform::where('platform_id', $daPlatform->platform->id)->count();
-                            if ($platformCount == 0) {
-                                $platform = new Plartform();
+                    if ($newGame !== null) {
+                        $platform = $game->platforms;
+                        if ($platform != null) {
+                            foreach ($platform as $daPlatform) {
+                                $platformCount = Plartform::where('platform_id', $daPlatform->platform->id)->count();
+                                if ($platformCount == 0) {
+                                    $platform = new Plartform();
 
-                                $platform->platform_id = $daPlatform->platform->id;
-                                $platform->slug = $daPlatform->platform->slug;
-                                $platform->name = $daPlatform->platform->name;
-                                $platform->save();
-                                $newGame->platforms()->attach($platform);
+                                    $platform->platform_id = $daPlatform->platform->id;
+                                    $platform->slug = $daPlatform->platform->slug;
+                                    $platform->name = $daPlatform->platform->name;
+                                    $platform->save();
+                                    if ($platform !== null) {
+                                        $newGame->platforms()->attach($platform);
+                                    }
+                                } else if ($platformCount > 0) {
+                                    $platformCoun = Plartform::where('platform_id', $daPlatform->platform->id)->first();
+                                    $newGame->platforms()->attach($platformCoun);
+                                }
                             }
                         }
-                    }
 
 
-                    $genre = $game->genres;
-                    if ($genre != null) {
-                        foreach ($genre as $g) {
-                            $gCount = Genre::where('slug', $g->slug)->count();
+                        $genre = $game->genres;
+                        if ($genre != null) {
+                            foreach ($genre as $g) {
+                                $gCount = Genre::where('slug', $g->slug)->count();
 
-                            if ($gCount == 0) {
-                                $newG = new Genre();
+                                if ($gCount == 0) {
+                                    $newG = new Genre();
 
-                                $newG->name = $g->name;
-                                $newG->slug = $g->slug;
+                                    $newG->name = $g->name;
+                                    $newG->slug = $g->slug;
 
-                                $newG->save();
+                                    $newG->save();
+                                    if ($newGame !== null) {
+                                        $newGame->genre()->attach($newG);
+                                    }
+                                } else if ($gCount > 0) {
+                                    $gCount = Genre::where('slug', $g->slug)->first();
 
-                                $newGame->genre()->attach($newG);
+                                    $newGame->genre()->attach($gCount);
+                                }
                             }
                         }
-                    }
 
 
-                    $tag = $game->tags;
-                    if ($tag != null) {
-                        foreach ($tag as $g) {
-                            $gCount = Tag::where('slug', $g->slug)->count();
+                        $tag = $game->tags;
+                        if ($tag != null) {
+                            foreach ($tag as $g) {
+                                $gCount = Tag::where('slug', $g->slug)->count();
 
-                            if ($gCount == 0) {
-                                $newG = new Tag();
+                                if ($gCount == 0) {
+                                    $newG = new Tag();
 
-                                $newG->name = $g->name;
-                                $newG->slug = $g->slug;
-                                $newG->language = $g->language;
-                                $newG->image_background = $g->image_background;
+                                    $newG->name = $g->name;
+                                    $newG->slug = $g->slug;
+                                    $newG->language = $g->language;
+                                    $newG->image_background = $g->image_background;
 
-                                $newG->save();
-
-                                $newGame->tags()->attach($newG);
+                                    $newG->save();
+                                    if ($newGame !== null) {
+                                        $newGame->tags()->attach($newG);
+                                    }
+                                } else if ($gCount > 0) {
+                                    $gCoun = Tag::where('slug', $g->slug)->first();
+                                    $newGame->genre()->attach($gCoun);
+                                }
                             }
                         }
-                    }
 
 
-                    $Screenshot = $game->short_screenshots;
-                    if ($Screenshot != null) {
-                        foreach ($Screenshot as $g) {
-                            $gCount = Screenshot::where('image', $g->image)->count();
+                        $Screenshot = $game->short_screenshots;
+                        if ($Screenshot != null) {
+                            foreach ($Screenshot as $g) {
+                                $gCount = Screenshot::where('image', $g->image)->count();
 
-                            if ($gCount == 0) {
-                                $newG = new Screenshot();
+                                if ($gCount == 0) {
+                                    $newG = new Screenshot();
 
-                                $newG->slug = $game->slug;
-                                $newG->image = $g->image;
+                                    $newG->slug = $game->slug;
+                                    $newG->image = $g->image;
 
-                                $newG->save();
-                                $newGame->screenshots()->attach($newG);
+                                    $newG->save();
+                                    if ($newGame !== null) {
+                                        $newGame->screenshots()->attach($newG);
+                                    }
+                                }
                             }
                         }
-                    }
 
 
-                    $store = $game->stores;
-                    if ($store != null) {
-                        foreach ($store as $g) {
-                            $gCount = Store::where('name', $g->store->name)->count();
+                        $store = $game->stores;
+                        if ($store != null) {
+                            foreach ($store as $g) {
+                                $gCount = Store::where('name', $g->store->name)->count();
 
-                            if ($gCount == 0) {
-                                $newG = new Store();
+                                if ($gCount == 0) {
+                                    $newG = new Store();
 
-                                $newG->slug = $g->store->slug;
-                                $newG->name = $g->store->name;
+                                    $newG->slug = $g->store->slug;
+                                    $newG->name = $g->store->name;
 
-                                $newG->save();
-                                $newGame->stores()->attach($newG);
+                                    $newG->save();
+                                    if ($newGame !== null) {
+                                        $newGame->stores()->attach($newG);
+                                    }
+                                } else if ($gCount > 0) {
+                                    $gCount = Store::where('name', $g->store->name)->first();
+                                    $newGame->stores()->attach($gCount);
+                                }
                             }
                         }
                     }
                 }
+                $x++;
             }
-            $x++;
         }
         // $response = Http::withoutVerifying()->get('https://api.rawg.io/api/games?dates=2010-09-23%2C2023-09-23&key=c57b0e1d3bc043baa85da898e34888b2&page=2&page_size=1000');
         // dd($response->body());

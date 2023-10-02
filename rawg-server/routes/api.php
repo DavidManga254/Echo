@@ -15,12 +15,12 @@ use App\Http\Controllers\DataController;
 |
 */
 
-Route::get('/insert', 'App\Http\Controllers\DataController@index');
+// Route::get('/insert', 'App\Http\Controllers\DataController@index');
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 /*
 |--------------------------------------------------------------------------
@@ -42,11 +42,10 @@ Route::post('/login', 'App\Http\Controllers\login\LoginController@index');
 | protected routes
 |--------------------------------------------------------------------------
 */
-
 Route::middleware('auth:api')->group(function () {
     //get games by page
     Route::get('/games/{page}', 'App\Http\Controllers\GamesController\GamesController@index');
 
     //game details
-    Route::get('games/{slug}', 'App\Http\Controllers\gameDetails\GameDetailsController@index');
+    Route::get('/games/{slug}', 'App\Http\Controllers\gameDetails\GameDetailsController@index');
 });
