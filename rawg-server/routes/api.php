@@ -47,5 +47,5 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/games/{page}', 'App\Http\Controllers\GamesController\GamesController@index');
 
     //game details
-    Route::get('/games/{slug}', 'App\Http\Controllers\gameDetails\GameDetailsController@index');
+    Route::get('/games/info/{slug}', 'App\Http\Controllers\gameDetails\GameDetailsController@index');
 });

@@ -63,7 +63,7 @@ class SignUpController extends Controller
             $newRegisteredUser->email_verified_at = Carbon::now();
             $newRegisteredUser->password = $userWaitingForConfirmation->password;
             $newRegisteredUser->user_id = Str::uuid();
-            $newRegisteredUser->api_token = hash('sha256', Str::random(40));
+            $newRegisteredUser->api_token =  Str::random(40);
 
             $newRegisteredUser->save();
 
