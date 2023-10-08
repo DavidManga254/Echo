@@ -24,4 +24,20 @@ class GamesController extends Controller
             return response()->json(ApiHelper::success(data: []));
         }
     }
+
+    public function gameDetails(Request $request, $slug)
+    {
+        try {
+            $game = Game::where('slug', $slug)
+                ->with('screenshots')
+                ->with('tags')
+                ->with('stores')
+                ->with('platforms')
+                ->first();
+
+            return response()->json(ApiHelper::success(data: $game));
+        } catch (\Exception $e) {
+            return response()->json(ApiHelper::error());
+        }
+    }
 }

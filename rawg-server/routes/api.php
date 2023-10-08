@@ -43,13 +43,19 @@ Route::post('/login', 'App\Http\Controllers\login\LoginController@index');
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth:api')->group(function () {
-    //get games by page
+    //games
     Route::get('/games/{page}', 'App\Http\Controllers\GamesController\GamesController@index');
-
-    //game details
-    Route::get('/games/info/{slug}', 'App\Http\Controllers\gameDetails\GameDetailsController@index');
+    Route::get('/games/info/{slug}', 'App\Http\Controllers\GamesController\GamesController@gameDetails');
 
     //Games by genre
-    Route::get('/genre', 'App\Http\Controllers\CategoryGames\CategoryGamesController@index');
-    Route::get('/genre/{genreSlug}', 'App\Http\Controllers\CategoryGames\CategoryGamesController@gamesByGenre');
+    Route::get('/genre', 'App\Http\Controllers\CategoryController\CategoryController@index');
+    Route::get('/genre/{genreSlug}', 'App\Http\Controllers\CategoryController\CategoryController@gamesByGenre');
+
+    //platforms
+    Route::get('/platform', 'App\Http\Controllers\PlatformController\PlatformController@index');
+    Route::get('/platform/{platformSlug}', 'App\Http\Controllers\PlatformController\PlatformController@getGamesByPlatform');
+
+    //store
+    Route::get('/store', 'App\Http\Controllers\StoreController\StoreController@index');
+    Route::get('/store/{storeSlug}', 'App\Http\Controllers\StoreController\StoreController@getGamesByStore');
 });

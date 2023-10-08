@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\CategoryGames;
+namespace App\Http\Controllers\CategoryController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use function PHPUnit\Framework\throwException;
 
-class CategoryGamesController extends Controller
+class CategoryController extends Controller
 {
     //
     public function index(Request $request)
