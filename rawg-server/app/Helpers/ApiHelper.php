@@ -11,7 +11,6 @@ class ApiHelper
             "message" => $message,
             "errorMessage" => $errorMessage,
             "data" => $data,
-            "errors" => [],
         ];
     }
 
@@ -22,7 +21,6 @@ class ApiHelper
             "message" => $message,
             "errorMessage" => $errorMessage,
             "data" => null,
-            "errors" => $errors,
         ];
     }
 }

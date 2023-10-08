@@ -7,6 +7,4 @@ const apiInstance = axios.create({
     },
 });
 
-export interface ResponseInterface {}
-
 export { apiInstance };
