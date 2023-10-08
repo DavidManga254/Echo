@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\game\Game;
 use App\Helpers\ApiHelper;
+use App\Http\Resources\games\GamesResource;
 
 class GamesController extends Controller
 {
     //
     public function index(Request $request, $page)
     {
-        // $gamesList = Game::orderBy('released', 'desc')->paginate(10);
+        $page = $request->input('page');
 
         $gamesList = Game::orderBy('released', 'desc')->paginate(config('pagination.per_page'), ['*'], 'page', $page);
 
@@ -38,6 +39,37 @@ class GamesController extends Controller
             return response()->json(ApiHelper::success(data: $game));
         } catch (\Exception $e) {
             return response()->json(ApiHelper::error());
+        }
+    }
+
+    public function searchGame(Request $request, $gameName)
+    {
+        try {
+            $page = $request->input('page');
+            $order = $request->input('order');
+
+            $gameSearchQuery = Game::where('name', 'LIKE', '%' . $gameName . '%');
+
+
+            switch ($order) {
+                case 'releaseDate':
+                    $gameSearchQuery = $gameSearchQuery->orderBy('released', 'desc');
+                    break;
+
+                case 'rating':
+                    $gameSearchQuery = $gameSearchQuery->orderBy('rating', 'desc');
+                    break;
+
+                default:
+                    break;
+            }
+
+            $games = $gameSearchQuery->paginate(config('pagination.per_page'), ['*'], 'page', $page);
+
+            return response()->json(ApiHelper::success(data: GamesResource::collection($games->items())));
+        } catch (\Exception $e) {
+            dd($e);
+            return response()->json(ApiHelper::error(message: config('apierrormessages.platform_not_exist')), 404);
         }
     }
 }

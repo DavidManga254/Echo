@@ -44,8 +44,10 @@ Route::post('/login', 'App\Http\Controllers\login\LoginController@index');
 */
 Route::middleware('auth:api')->group(function () {
     //games
-    Route::get('/games/{page}', 'App\Http\Controllers\GamesController\GamesController@index');
+    Route::get('/games', 'App\Http\Controllers\GamesController\GamesController@index');
     Route::get('/games/info/{slug}', 'App\Http\Controllers\GamesController\GamesController@gameDetails');
+    Route::get('/games/search/{gameName}', 'App\Http\Controllers\GamesController\GamesController@searchGame');
+
 
     //Games by genre
     Route::get('/genre', 'App\Http\Controllers\CategoryController\CategoryController@index');
@@ -58,4 +60,6 @@ Route::middleware('auth:api')->group(function () {
     //store
     Route::get('/store', 'App\Http\Controllers\StoreController\StoreController@index');
     Route::get('/store/{storeSlug}', 'App\Http\Controllers\StoreController\StoreController@getGamesByStore');
+
+    //search
 });

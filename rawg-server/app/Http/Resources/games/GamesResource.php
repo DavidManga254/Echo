@@ -21,7 +21,6 @@ class GamesResource extends JsonResource
             "released" => $this->released,
             "background_image" => $this->background_image,
             "rating" => $this->rating,
-            "genre" => GenreResource::collection($this->genre->take(2))
         ];
     }
 }
