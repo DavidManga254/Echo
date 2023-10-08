@@ -12,7 +12,7 @@ class Store extends Model
 {
     use HasFactory;
 
-    public function game(): BelongsToMany
+    public function games(): BelongsToMany
     {
         return $this->belongsToMany(Game::class);
     }
