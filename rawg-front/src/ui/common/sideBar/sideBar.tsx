@@ -1,6 +1,6 @@
 export function SideBar() {
     return (
-        <div className="w-full sm:h-screen sm:overflow-y-scroll pl-2 pt-4 lg:h-auto lg:overflow-auto lg:pl-10">
+        <div className="w-full sm:h-screen sm:overflow-y-scroll lg:pl-2 pt-4 lg:h-auto lg:overflow-auto text-white">
             <div className="mt mb-3 font-semibold sm:text-xl font-sans lg:text-3xl lg:font-bold">
                 Home
             </div>

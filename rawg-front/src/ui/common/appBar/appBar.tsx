@@ -37,18 +37,18 @@ export function TopAppBar() {
                             setDrawerState((previous) => !previous)
                         }
                     >
-                        <div className="w-[50vw]">
+                        <div className="w-[60vw] bg-[rgb(32,31,31)]">
                             <SideBar />
                         </div>
                     </Drawer>
                 </div>
-                <div className="sm:hidden text-white  md:inline-flex flex w-full justify-between h-full items-center font-sans font-semibold">
-                    <div>
+                <div className="sm:hidden text-white text-sm  md:inline-flex flex w-full justify-between h-full items-center font-sans font-semibold">
+                    {/* <div>
                         <p>{appConstants.sign_in}</p>
                     </div>
                     <div>
                         <p>{appConstants.sign_up}</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

@@ -9,9 +9,9 @@ export function GameDetails() {
     const [backDropImageUrl, setBackDropImageUrl] = useState('');
     return (
         <div>
-            <div>
+            <div className="md:flex md:flex-row">
                 {/* first column */}
-                <div>
+                <div className="md:w-1/2">
                     <div>
                         <p className="sm:text-center text-xs sm:mb-4 text-gray-400">
                             HOME/GAMES/BALDUR'S GATE III

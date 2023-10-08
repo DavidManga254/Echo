@@ -15,7 +15,7 @@ export function GameCard(props: {
     const [display, setDisplay] = useState(false);
 
     return (
-        <div className="rounded-xl bg-[#282727] mb-4 overflow-hidden lg:max-w-[22.5%] lg:mr-4">
+        <div className="rounded-xl bg-[#282727] mb-4 overflow-hidden md:max-w-[23%] md:mr-3">
             <div className="w-full">
                 <img
                     className="w-full"
