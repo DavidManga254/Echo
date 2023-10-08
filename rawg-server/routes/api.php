@@ -31,7 +31,7 @@ use App\Http\Controllers\DataController;
 //Signup routes
 Route::group(['namespace' => 'App\Http\Controllers\signup'], function () {
     Route::post('/signup', 'SignupController@index');
-    Route::post('signup/confirmEmail/{token}', 'SignUpController@registerUser');
+    Route::post('/signup/confirmEmail/{token}', 'SignUpController@registerUser');
 });
 
 //login route
@@ -49,6 +49,7 @@ Route::middleware('auth:api')->group(function () {
     //game details
     Route::get('/games/info/{slug}', 'App\Http\Controllers\gameDetails\GameDetailsController@index');
 
-    //Games by tag
-    Route::get('games/genre/{genreSlug}', 'App\Http\Controllers\CategoryGames\CategoryGamesController@index');
+    //Games by genre
+    Route::get('/genre', 'App\Http\Controllers\CategoryGames\CategoryGamesController@index');
+    Route::get('/genre/{genreSlug}', 'App\Http\Controllers\CategoryGames\CategoryGamesController@gamesByGenre');
 });

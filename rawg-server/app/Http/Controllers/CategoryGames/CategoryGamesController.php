@@ -8,7 +8,7 @@ use App\Helpers\ApiHelper;
 use App\Models\tag\Tag;
 use App\Models\genre\Genre;
 use App\Http\Resources\games\GamesResource;
-use Psr\Container\NotFoundExceptionInterface;
+use App\Http\Resources\genre\GenreResource;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use function PHPUnit\Framework\throwException;
@@ -16,7 +16,18 @@ use function PHPUnit\Framework\throwException;
 class CategoryGamesController extends Controller
 {
     //
-    public function index(Request $request, $genreSlug)
+    public function index(Request $request)
+    {
+        try {
+            $genres = Genre::all();
+
+            return response()->json(ApiHelper::success(data: GenreResource::collection($genres)));
+        } catch (\Exception $e) {
+            return response()->json(ApiHelper::error(), 404);
+        }
+    }
+
+    public function gamesByGenre(Request $request, $genreSlug)
     {
         try {
             $page = $request->input('page');
