@@ -21,7 +21,14 @@ class GenreResource extends JsonResource
         return [
             "name" => $this->name,
             "slug" => $this->slug,
-            "background_image" =>  $firstGame->background_image
+            "background_image" =>  $firstGame->background_image,
+            "top_3_games" => Genre::where('slug', $this->slug)
+                ->first()
+                ->games()
+                ->orderBy('released', 'desc')
+                ->select('name', 'released')
+                ->take(3)
+                ->get('name')
         ];
     }
 }
