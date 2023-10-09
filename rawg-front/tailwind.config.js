@@ -10,7 +10,11 @@ export default {
         // colors: {
         //     // background: 'rgb(21,21,21)',
         // },
-        extend: {},
+        extend: {
+            backgroundImage: {
+                'landing-image': "url('./src/assets/background.jpg')",
+            },
+        },
     },
     plugins: [],
 };
