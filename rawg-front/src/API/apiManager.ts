@@ -1,16 +1,10 @@
-import { apiInstance } from './apiConfiguration';
+import { signUp, confirmEmail, login } from './apiMethods/userApi/userApi';
 
 const useRawgApiManager = () => {
-    const api = apiInstance;
-
-    async function getAllGames() {
-        let response = await api.get('games');
-
-        return response;
-    }
-
     return {
-        getAllGames,
+        signUp,
+        confirmEmail,
+        login,
     };
 };
 

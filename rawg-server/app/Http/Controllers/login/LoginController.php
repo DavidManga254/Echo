@@ -8,8 +8,10 @@ use App\Http\Requests\login\LoginRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Helpers\ApiHelper;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
-
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 class LoginController extends Controller
 {
@@ -21,13 +23,27 @@ class LoginController extends Controller
 
         $userToLogin = User::where('email', $userEmail)->first();
 
+
+
         if ($userToLogin != null) {
             if (Hash::check($userPassword, $userToLogin->password)) {
+                $now = Carbon::now();
+                $expirationTime = $now->copy()->addDays(30)->timestamp;
+                $userPayload = [
+                    "iat" => Carbon::now()->copy()->timestamp,
+                    "exp" => $expirationTime,
+                    "id" => $userToLogin->user_id,
+                    "name" => $userToLogin->name,
+                    "email" => $userToLogin->email
+                ];
+
+                $jwt = JWT::encode($userPayload, env('JWT_KEY'), 'HS256');
+
                 $userToLogin->api_token = Str::random(40);
                 $userToLogin->save();
 
                 return response()->json(ApiHelper::success(data: [
-                    "apiToken" => $userToLogin->api_token,
+                    "apiToken" => $jwt,
                 ]));
             } else {
                 return response()->json(ApiHelper::error(errorMessage: config('apierrormessages.invalid_credentials')));

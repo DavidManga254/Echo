@@ -39,7 +39,7 @@ export async function confirmEmail(email: string, token: string): Promise<String
 }
 
 interface loginInterface {
-    api_key: string;
+    apiToken: string;
 }
 
 export async function login(email: string, password: string): Promise<String> {
@@ -54,5 +54,5 @@ export async function login(email: string, password: string): Promise<String> {
         },
     });
 
-    return response.data.data.api_key;
+    return response.data.data.apiToken;
 }

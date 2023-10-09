@@ -42,7 +42,7 @@ Route::post('/login', 'App\Http\Controllers\login\LoginController@index');
 | protected routes
 |--------------------------------------------------------------------------
 */
-Route::middleware('auth:api')->group(function () {
+Route::middleware('jwt.auth')->group(function () {
     //games
     Route::get('/games', 'App\Http\Controllers\GamesController\GamesController@index');
     Route::get('/games/info/{slug}', 'App\Http\Controllers\GamesController\GamesController@gameDetails');
