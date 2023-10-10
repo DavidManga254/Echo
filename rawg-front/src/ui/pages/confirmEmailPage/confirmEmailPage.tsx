@@ -35,6 +35,7 @@ export function ConfirmEmailPage() {
 
                     setTimeout(() => {
                         setErrorModal(false);
+                        navigate('/signup');
                     }, 6000);
                 }
             } else {

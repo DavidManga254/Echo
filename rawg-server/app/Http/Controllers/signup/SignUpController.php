@@ -57,6 +57,10 @@ class SignUpController extends Controller
 
         $userWaitingForConfirmation = RegisterUser::where('email', $userEmail)->first();
 
+        if ($userWaitingForConfirmation === null) {
+            return response()->json(Apihelper::error(message: config('apierrormessages.invalid_credentials')), 401);
+        }
+
         if ($userWaitingForConfirmation->email == $userEmail && $userWaitingForConfirmation->token == $token) {
             $newRegisteredUser = new User();
 

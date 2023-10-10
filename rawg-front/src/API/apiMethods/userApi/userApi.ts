@@ -41,21 +41,26 @@ export async function confirmEmail(
     return response;
 }
 
-interface loginInterface {
+export interface loginInterface {
     apiToken: string;
 }
 
-export async function login(email: string, password: string): Promise<String> {
-    const response: AxiosResponse<ResponseInterface<loginInterface>, any> = await apiInstance.get(
+export async function login(
+    email: string,
+    password: string,
+): Promise<AxiosResponse<ResponseInterface<loginInterface>>> {
+    const formData = new FormData();
+
+    formData.append('email', email);
+    formData.append('password', password);
+
+    const response: AxiosResponse<ResponseInterface<loginInterface>, any> = await apiInstance(
         `/login`,
         {
             method: 'post',
-            data: {
-                email: email,
-                password: password,
-            },
+            data: formData,
         },
     );
 
-    return response.data.data.apiToken;
+    return response;
 }

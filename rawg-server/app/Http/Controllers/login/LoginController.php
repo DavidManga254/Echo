@@ -9,9 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Helpers\ApiHelper;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
 
 class LoginController extends Controller
 {
@@ -39,17 +37,15 @@ class LoginController extends Controller
 
                 $jwt = JWT::encode($userPayload, env('JWT_KEY'), 'HS256');
 
-                $userToLogin->api_token = Str::random(40);
-                $userToLogin->save();
 
                 return response()->json(ApiHelper::success(data: [
                     "apiToken" => $jwt,
                 ]));
             } else {
-                return response()->json(ApiHelper::error(errorMessage: config('apierrormessages.invalid_credentials')));
+                return response()->json(ApiHelper::error(errorMessage: config('apierrormessages.invalid_credentials')), 401);
             }
         } else {
-            return response()->json(ApiHelper::error(errorMessage: config('apierrormessages.invalid_credentials')));
+            return response()->json(ApiHelper::error(errorMessage: config('apierrormessages.invalid_credentials')), 401);
         }
     }
 }
