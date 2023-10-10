@@ -41,7 +41,7 @@ class SignUpController extends Controller
                 $newUserToRegister->save();
 
 
-                Mail::to($userEmail)->send(new SignUpMail($newUserToRegister->token, $newUserToRegister->email));
+                Mail::to($userEmail)->send(new SignUpMail($newUserToRegister->token, $newUserToRegister->email, $newUserToRegister->first_name, $newUserToRegister->second_name));
 
                 return response()->json(ApiHelper::success(message: config('emails.verification_email_sent')));
             } else {
@@ -67,7 +67,6 @@ class SignUpController extends Controller
             $newRegisteredUser->email_verified_at = Carbon::now();
             $newRegisteredUser->password = $userWaitingForConfirmation->password;
             $newRegisteredUser->user_id = Str::uuid();
-            $newRegisteredUser->api_token =  Str::random(40);
 
             $newRegisteredUser->save();
 
@@ -75,7 +74,7 @@ class SignUpController extends Controller
 
             return response()->json(ApiHelper::success(message: config('usermessages.sign_up_successful')));
         } else {
-            return response()->json(Apihelper::error(message: config('apierrormessages.invalid_credentials')));
+            return response()->json(Apihelper::error(message: config('apierrormessages.invalid_credentials')), 401);
         }
     }
 }

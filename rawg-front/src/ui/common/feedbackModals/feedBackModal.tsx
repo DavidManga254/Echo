@@ -13,7 +13,9 @@ export function FeedbackModal(props: { message: string; success: boolean }) {
             open={true}
             TransitionComponent={TransitionTop}
         >
-            <Alert severity={props.success ? 'success' : 'error'}>{props.message}</Alert>
+            <Alert severity={props.success ? 'success' : 'error'} variant="filled">
+                {props.message}
+            </Alert>
         </Snackbar>
     );
 }

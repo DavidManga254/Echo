@@ -22,18 +22,23 @@ export async function signUp(
     return response;
 }
 
-export async function confirmEmail(email: string, token: string): Promise<String> {
-    const response: AxiosResponse<ResponseInterface<String>, any> = await apiInstance.post(
+export async function confirmEmail(
+    email: string,
+    token: string,
+): Promise<AxiosResponse<ResponseInterface<[]>, any>> {
+    const formData = new FormData();
+
+    formData.append('email', email);
+
+    const response: AxiosResponse<ResponseInterface<[]>, any> = await apiInstance(
         `/signup/confirmEmail/${token}`,
         {
             method: 'post',
-            data: {
-                email: email,
-            },
+            data: formData,
         },
     );
 
-    return response.data.data;
+    return response;
 }
 
 interface loginInterface {

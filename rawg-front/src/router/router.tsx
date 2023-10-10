@@ -5,6 +5,7 @@ import { GameDetails } from '../ui/pages/gameDetailsPage/gameDetailsPage';
 import { LandingPage } from '../ui/pages/landing/landingPage';
 import { SignUpPage } from '../ui/pages/signUpPage/signUpPage';
 import { LoginPage } from '../ui/pages/loginPage/loginPage';
+import { ConfirmEmailPage } from '../ui/pages/confirmEmailPage/confirmEmailPage';
 const router = createBrowserRouter([
     {
         path: '/',
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
     {
         path: '/login',
         element: <LoginPage />,
+    },
+    {
+        path: '/signup/confirmEmail/:token',
+        element: <ConfirmEmailPage />,
     },
     {
         path: 'home/',
