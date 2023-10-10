@@ -7,25 +7,23 @@ export async function signUp(
     secondName: string,
     email: string,
     password: string,
-): Promise<String> {
-    const response: AxiosResponse<ResponseInterface<String>, any> = await apiInstance.get(
-        '/signup',
-        {
-            method: 'post',
-            data: {
-                firstname: firstName,
-                secondname: secondName,
-                email: email,
-                password: password,
-            },
-        },
-    );
+): Promise<AxiosResponse<ResponseInterface<string>, any>> {
+    const formData = new FormData();
 
-    return response.data.data;
+    formData.append('firstname', firstName);
+    formData.append('secondname', secondName);
+    formData.append('email', email);
+    formData.append('password', password);
+
+    const response: AxiosResponse<ResponseInterface<string>, any> = await apiInstance('/signup', {
+        method: 'post',
+        data: formData,
+    });
+    return response;
 }
 
 export async function confirmEmail(email: string, token: string): Promise<String> {
-    const response: AxiosResponse<ResponseInterface<String>, any> = await apiInstance.get(
+    const response: AxiosResponse<ResponseInterface<String>, any> = await apiInstance.post(
         `/signup/confirmEmail/${token}`,
         {
             method: 'post',
@@ -43,16 +41,16 @@ interface loginInterface {
 }
 
 export async function login(email: string, password: string): Promise<String> {
-    const response: AxiosResponse<
-        ResponseInterface<loginInterface>,
-        any
-    > = await apiInstance.get(`/login`, {
-        method: 'post',
-        data: {
-            email: email,
-            password: password,
+    const response: AxiosResponse<ResponseInterface<loginInterface>, any> = await apiInstance.get(
+        `/login`,
+        {
+            method: 'post',
+            data: {
+                email: email,
+                password: password,
+            },
         },
-    });
+    );
 
     return response.data.data.apiToken;
 }

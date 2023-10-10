@@ -10,7 +10,7 @@ export function LandingPage() {
                     </div>
                     <div>
                         <button
-                            onClick={() => navigate('signup')}
+                            onClick={() => navigate('/signup')}
                             className="bg-blue-500 rounded p-2"
                         >
                             Get Started

@@ -4,7 +4,7 @@ namespace App\Mail\SignUp;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Asahasrabuddhe\LaravelMJML\Mail\Mailable;
+use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -40,8 +40,7 @@ class SignUpMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            // view: 'emails.signUp.signUpEmail',
-            view: $this->mjml('emails.signUp.signUpEmail')->buildMjmlView()['html'],
+            view: 'emails.signUp.signUpEmail',
         );
     }
 

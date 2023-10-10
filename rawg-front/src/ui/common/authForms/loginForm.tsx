@@ -1,5 +1,7 @@
 import GoogleIcon from '@mui/icons-material/Google';
+import { useNavigate } from 'react-router-dom';
 export function LoginForm() {
+    const navigate = useNavigate();
     return (
         <div className=" w-full">
             <div className="mb-4">
@@ -23,6 +25,17 @@ export function LoginForm() {
                 <div className="flex justify-center">
                     <button className="bg-blue-500 rounded p-2 md:text-xl">Log in</button>
                 </div>
+            </div>
+            <div className="mb-4 flex justify-center">
+                <p>
+                    Do not have an account?{' '}
+                    <span
+                        onClick={() => navigate('/signup')}
+                        className=" text-blue-500 hover:cursor-pointer"
+                    >
+                        sign up
+                    </span>
+                </p>
             </div>
             <div className="mb-4 flex justify-center">
                 <p>or</p>

@@ -20,31 +20,35 @@ class SignUpController extends Controller
     //
     public function index(SignupRequest $request)
     {
-        $userEmail = $request->input('email');
-        $userFirstName = $request->input('firstname');
-        $userSecondName = $request->input('secondname');
-        $userPassword = $request->input('password');
+        try {
+            $userEmail = $request->input('email');
+            $userFirstName = $request->input('firstname');
+            $userSecondName = $request->input('secondname');
+            $userPassword = $request->input('password');
 
-        $doesUserExistInWait = RegisterUser::where('email', $userEmail)->count();
-        $isUserAlreadyRegisterd = User::where('email', $userEmail)->count();
+            $doesUserExistInWait = RegisterUser::where('email', $userEmail)->count();
+            $isUserAlreadyRegisterd = User::where('email', $userEmail)->count();
 
-        if ($doesUserExistInWait == 0 && $isUserAlreadyRegisterd == 0) {
-            $newUserToRegister = new RegisterUser();
+            if ($doesUserExistInWait == 0 && $isUserAlreadyRegisterd == 0) {
+                $newUserToRegister = new RegisterUser();
 
-            $newUserToRegister->first_name = $userFirstName;
-            $newUserToRegister->second_name = $userSecondName;
-            $newUserToRegister->email = $userEmail;
-            $newUserToRegister->password = Hash::make($userPassword);
-            $newUserToRegister->token = Str::random(40);
+                $newUserToRegister->first_name = $userFirstName;
+                $newUserToRegister->second_name = $userSecondName;
+                $newUserToRegister->email = $userEmail;
+                $newUserToRegister->password = Hash::make($userPassword);
+                $newUserToRegister->token = Str::random(40);
 
-            $newUserToRegister->save();
+                $newUserToRegister->save();
 
 
-            Mail::to($userEmail)->send(new SignUpMail($newUserToRegister->token, $newUserToRegister->email));
+                Mail::to($userEmail)->send(new SignUpMail($newUserToRegister->token, $newUserToRegister->email));
 
-            return response()->json(ApiHelper::success(message: config('emails.verification_email_sent')));
-        } else {
-            return response()->json(ApiHelper::error(errorMessage: config('apierrormessages.email_already_taken')));
+                return response()->json(ApiHelper::success(message: config('emails.verification_email_sent')));
+            } else {
+                return response()->json(ApiHelper::error(errorMessage: config('apierrormessages.email_already_taken')), 409);
+            }
+        } catch (\Exception $e) {
+            return response()->json(ApiHelper::error(errors: $e), 500);
         }
     }
     public function registerUser(RegisterUserRequest $request, $token)

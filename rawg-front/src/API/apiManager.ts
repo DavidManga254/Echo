@@ -1,6 +1,6 @@
 import { signUp, confirmEmail, login } from './apiMethods/userApi/userApi';
 
-const useRawgApiManager = () => {
+const useApiManager = () => {
     return {
         signUp,
         confirmEmail,
@@ -8,4 +8,4 @@ const useRawgApiManager = () => {
     };
 };
 
-export { useRawgApiManager };
+export { useApiManager };

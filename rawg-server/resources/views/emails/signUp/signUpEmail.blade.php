@@ -1,5 +1,5 @@
 <!DOCTYPE html>
 <html>
     <head></head>
-    <body>Hello{{$signUpToken}}{{$email}}</body>
+    <body>Hello   {{$signUpToken}}   {{$email}}</body>
 </html>
