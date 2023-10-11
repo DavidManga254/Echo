@@ -6,6 +6,7 @@ import { FeedbackModal } from '../feedbackModals/feedBackModal';
 import { LoadingBackdrop } from '../loadingModal/loadingmodal';
 import { AxiosError, AxiosResponse } from 'axios';
 import axios from 'axios';
+import { GoogleSignInButton } from '../googleSignIn/googleSignIn';
 
 export function SignUpForm() {
     const navigate = useNavigate();
@@ -182,9 +183,7 @@ export function SignUpForm() {
                 <p>or</p>
             </div>
             <div className="mb-4 flex justify-center">
-                <button className="bg-white text-black rounded-xl p-1">
-                    <GoogleIcon /> Continue with google
-                </button>
+                <GoogleSignInButton />
             </div>
         </div>
     );

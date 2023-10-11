@@ -1,4 +1,4 @@
-export interface ResponseInterface<T> {
+export interface ResponseInterface<T = void> {
     status: string;
     message: string;
     errorMessage: string;

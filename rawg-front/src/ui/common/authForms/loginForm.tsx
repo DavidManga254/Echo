@@ -5,11 +5,10 @@ import { useApiManager } from '../../../API/apiManager';
 import { FeedbackModal } from '../feedbackModals/feedBackModal';
 import { LoadingBackdrop } from '../loadingModal/loadingmodal';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import { AxiosError, AxiosResponse } from 'axios';
 import { loginInterface } from '../../../API/apiMethods/userApi/userApi';
 import { ResponseInterface } from '../../../API/responseInterface';
-
+import { GoogleSignInButton } from '../googleSignIn/googleSignIn';
 export function LoginForm() {
     const navigate = useNavigate();
     const [userDetails, setUserDetails] = useState({
@@ -45,8 +44,6 @@ export function LoginForm() {
             }
         } else {
             const token: string = response.data.data.apiToken;
-
-            Cookies.set(import.meta.env.VITE_API_KEY_NAME, token, { expires: 30, httpOnly: true });
 
             navigate('/home');
         }
@@ -124,9 +121,7 @@ export function LoginForm() {
                 <p>or</p>
             </div>
             <div className="mb-4 flex justify-center">
-                <button className="bg-white text-black rounded-xl p-1">
-                    <GoogleIcon /> Continue with google
-                </button>
+                <GoogleSignInButton />
             </div>
         </div>
     );
