@@ -2,6 +2,6 @@
 
 return [
 
-    "cookie_lifetime" => 4320
+    "cookie_lifetime" => 43200
 
 ];

@@ -1,4 +1,3 @@
-import GoogleIcon from '@mui/icons-material/Google';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useApiManager } from '../../../API/apiManager';
@@ -43,8 +42,6 @@ export function LoginForm() {
                 }, 6000);
             }
         } else {
-            const token: string = response.data.data.apiToken;
-
             navigate('/home');
         }
     }

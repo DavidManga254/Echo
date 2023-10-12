@@ -19,7 +19,7 @@ class ApiAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $token = $request->bearerToken();
+        $token = $_COOKIE[env('APP_COOKIE_NAME')];
 
         if ($token === null) {
             return response()->json(ApiHelper::error(), 403);

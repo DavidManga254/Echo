@@ -1,5 +1,22 @@
 import { LoginForm } from '../../common/authForms/loginForm';
+import { useApiManager } from '../../../API/apiManager';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { AxiosResponse } from 'axios';
+
 export function LoginPage() {
+    const getLoginStatus = useApiManager().getLoginStatus;
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        (async () => {
+            const response: AxiosResponse = await getLoginStatus();
+            if (response.status === 200) {
+                navigate('/home');
+            }
+        })();
+    }, []);
     return (
         <div className="bg-landing-image md:bg-cover md:bg-no-repeat w-screen min-h-screen">
             <div className="w-full min-h-screen bg-black bg-opacity-75 flex items-center text-white justify-center">

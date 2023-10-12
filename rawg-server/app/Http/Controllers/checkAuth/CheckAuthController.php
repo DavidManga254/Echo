@@ -15,28 +15,28 @@ class CheckAuthController extends Controller
     public function index(Request $request)
     {
 
-        $token = $request->cookie(env('APP_COOKIE'));
-
-        if ($token === null) {
-            return response()->json(ApiHelper::error(), 403);
-        }
-
         try {
+            $token = $_COOKIE[env('APP_COOKIE_NAME')];
+
+            if ($token === null) {
+                return response()->json(ApiHelper::success(), 403);
+            }
+
             $decodedToken = (array) JWT::decode($token, new Key(env('JWT_KEY'), 'HS256'));
 
 
             $user = User::where('email', $decodedToken['email'])->first();
 
             if ($user === null) {
-                return response()->json(ApiHelper::error(), 403);
+                return response()->json(ApiHelper::success(), 403);
             }
 
             if ($user->email === $decodedToken['email'] && $user->name === $decodedToken['name']) {
                 return response()->json(ApiHelper::success(), 200);
             } else {
-                return response()->json(ApiHelper::error(), 403);
+                return response()->json(ApiHelper::success(), 403);
             }
-        } catch (\Firebase\JWT\ExpiredException $e) {
+        } catch (\Exception $e) {
             return response()->json(ApiHelper::error(), 403);
         }
     }

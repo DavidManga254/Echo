@@ -2,10 +2,14 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState } from 'react';
 import { GameCard } from '../../common/gameCard/gameCard';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useApiManager } from '../../../API/apiManager';
 export function HomePage() {
     const navigate = useNavigate();
+    const checkLoginStatus = useApiManager().getLoginStatus;
 
     const [orderCriteria, setOrderCriteria] = useState('name');
+
     return (
         <div>
             <div className="mb-4">

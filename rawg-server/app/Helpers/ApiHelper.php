@@ -14,13 +14,13 @@ class ApiHelper
         ];
     }
 
-    public static function error($message = "Request failed", $errors = [], $errorMessage = '')
+    public static function error($message = "Request failed", $errors = [], $errorMessage = '', $data = [])
     {
         return [
             "status" => "error",
             "message" => $message,
             "errorMessage" => $errorMessage,
-            "data" => null,
+            "data" => $data,
             "error" => $errors
         ];
     }

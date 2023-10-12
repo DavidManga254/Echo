@@ -37,15 +37,34 @@ class LoginController extends Controller
 
                 $jwt = JWT::encode($userPayload, env('JWT_KEY'), 'HS256');
 
+                $cookie = $this->createCookie($jwt);
 
-                return response()->json(ApiHelper::success(data: [
-                    "apiToken" => $jwt,
-                ]));
+                $response = response()->json(ApiHelper::success())->withCookie($cookie);
+
+                // $response->cookie('cat', $jwt, 3000, "", env('SESSION_DOMAIN'), false, false);
+
+                return $response;
+                // return response()->json(ApiHelper::success())->setcookie('cat', $jwt, 3000, "", "", false,false);
             } else {
                 return response()->json(ApiHelper::error(errorMessage: config('apierrormessages.invalid_credentials')), 401);
             }
         } else {
             return response()->json(ApiHelper::error(errorMessage: config('apierrormessages.invalid_credentials')), 401);
         }
+    }
+
+    private function createCookie($jwt)
+    {
+        return  cookie(
+            env('APP_COOKIE_NAME'),
+            $jwt,
+            env('constants.cookie_lifetime'),
+            null,
+            env('APP_DEV_ENVIRONMENT') ? "" : env('SESSION_DOMAIN'),
+            true,
+            true,
+            false,
+            env('APP_DEV_ENVIRONMENT') ? "none" : 'strict'
+        );
     }
 }

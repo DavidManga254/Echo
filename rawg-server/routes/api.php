@@ -27,6 +27,7 @@ use App\Http\Controllers\DataController;
 | None protected routes
 |--------------------------------------------------------------------------
 */
+
 //check if verified
 Route::get('/checkAuth', 'App\Http\Controllers\checkAuth\CheckAuthController@index');
 
@@ -38,6 +39,9 @@ Route::group(['namespace' => 'App\Http\Controllers\signup'], function () {
 
 //login route
 Route::post('/login', 'App\Http\Controllers\login\LoginController@index');
+
+
+
 
 /*
 |--------------------------------------------------------------------------
