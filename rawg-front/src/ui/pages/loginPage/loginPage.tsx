@@ -2,7 +2,6 @@ import { LoginForm } from '../../common/authForms/loginForm';
 import { useApiManager } from '../../../API/apiManager';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { AxiosResponse } from 'axios';
 
 export function LoginPage() {
