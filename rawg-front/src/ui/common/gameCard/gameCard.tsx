@@ -6,10 +6,10 @@ import { useState } from 'react';
 import Divider from '@mui/material/Divider';
 
 export function GameCard(props: {
-    // gamename: string;
-    // gameImage: string;
+    gamename: string;
+    gameImage: string;
     // platforms: string[];
-    // releaseDate: string;
+    releaseDate: string;
     // genre: string;
 }) {
     const [display, setDisplay] = useState(false);
@@ -17,16 +17,11 @@ export function GameCard(props: {
     return (
         <div className="rounded-xl bg-[#282727] mb-4 overflow-hidden md:max-w-[23%] md:mr-3">
             <div className="w-full">
-                <img
-                    className="w-full"
-                    src="https://media.rawg.io/media/crop/600/400/games/fb5/fb5e0fdb1f6bb0e8b5da5d08bb83a5fc.jpg"
-                />
+                <img className="w-full" src={props.gameImage} />
             </div>
             <div className="p-2">
                 <div className="mb-2">
-                    <h2 className="fon font-bold sm:text-2xl md:text-base">
-                        Vampire: The Masquerade - Bloodlines 2
-                    </h2>
+                    <h2 className="fon font-bold sm:text-2xl md:text-base">{props.gamename}</h2>
                 </div>
                 <div className="mb-2">
                     <button className="bg-[#414040] sm:text-sm p-1 rounded mr-2">
@@ -45,30 +40,18 @@ export function GameCard(props: {
                             <Collapse>
                                 <div>
                                     <div className="flex justify-between mt-3">
-                                        <p className="text-sm text-gray-500">
-                                            Release date
-                                        </p>
-                                        <p className="te text-xs">
-                                            Dec 31, 2023
-                                        </p>
+                                        <p className="text-sm text-gray-500">Release date</p>
+                                        <p className="te text-xs">{props.releaseDate}</p>
                                     </div>
                                     <Divider />
                                     <div className="flex justify-between mt-3">
-                                        <p className="text-sm text-gray-500">
-                                            Release date
-                                        </p>
-                                        <p className="te text-xs">
-                                            Dec 31, 2023
-                                        </p>
+                                        <p className="text-sm text-gray-500">Release date</p>
+                                        <p className="te text-xs">Dec 31, 2023</p>
                                     </div>
                                     <Divider />
                                     <div className="flex justify-between mt-3">
-                                        <p className="text-sm text-gray-500">
-                                            Release date
-                                        </p>
-                                        <p className="te text-xs">
-                                            Dec 31, 2023
-                                        </p>
+                                        <p className="text-sm text-gray-500">Release date</p>
+                                        <p className="te text-xs">Dec 31, 2023</p>
                                     </div>
                                     <Divider />
                                 </div>

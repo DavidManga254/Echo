@@ -11,16 +11,19 @@ use App\Http\Resources\games\GamesResource;
 class GamesController extends Controller
 {
     //
-    public function index(Request $request, $page)
+    public function index(Request $request)
     {
         $page = $request->input('page');
 
         $gamesList = Game::orderBy('released', 'desc')->paginate(config('pagination.per_page'), ['*'], 'page', $page);
 
         $gameListData = $gamesList->items();
-
+        $page = $page + 1;
         if (!empty($gameListData)) {
-            return response()->json(ApiHelper::success(data: $gameListData));
+            return response()->json(ApiHelper::success(data: [
+                "next" => "games?page=$page",
+                "data" => GamesResource::collection($gameListData)
+            ]));
         } else {
             return response()->json(ApiHelper::success(data: []));
         }

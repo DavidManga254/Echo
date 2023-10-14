@@ -58,7 +58,7 @@ class LoginController extends Controller
         return  cookie(
             env('APP_COOKIE_NAME'),
             $jwt,
-            env('constants.cookie_lifetime'),
+            config('constants.cookie_lifetime'),
             null,
             env('APP_DEV_ENVIRONMENT') ? "" : env('SESSION_DOMAIN'),
             true,
