@@ -1,62 +1,73 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { GameCard } from '../../common/gameCard/gameCard';
-import { useNavigate } from 'react-router-dom';
 import { getAllGames, getNextPage } from './homePageModel';
 import { SingleGameInterface } from '../../../API/apiMethods/gamesApi/gamesApi';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export function HomePage() {
-    const navigate = useNavigate();
     const [orderCriteria, setOrderCriteria] = useState('name');
     const observerRef = useRef<HTMLDivElement | null>(null);
+    const [isFetching, setIsFetching] = useState(false);
 
     const [gameList, setGameList] = useState<SingleGameInterface[]>([]);
     const [nextPage, setNextPage] = useState<string>('');
 
-    var page = 1;
+    const observer = useRef<any>();
+
+    const nextPageRef = useRef(nextPage);
+    const gameListRef = useRef(gameList);
+
     async function getMoreGames() {
-        console.log(nextPage);
+        const response = await getNextPage(nextPageRef.current);
+        const newList = [...gameListRef.current, ...response.games];
 
-        const response = await getNextPage(nextPage);
-        const newList = [...gameList, ...response.games];
-
-        console.log(response.next);
+        console.log(newList);
 
         setGameList(newList);
+
         setNextPage(response.next);
+
+        setIsFetching(false);
     }
+
+    const lastGameRef = useCallback((node: any) => {
+        if (isFetching) return;
+
+        if (observer.current) {
+            observer.current.disconnect();
+        }
+
+        observer.current = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                getMoreGames();
+            }
+        });
+
+        if (node) {
+            observer.current.observe(node);
+        }
+    }, []);
+
+    useEffect(() => {
+        nextPageRef.current = nextPage;
+        gameListRef.current = gameList;
+    }, [nextPage, gameList]);
+
     useEffect(() => {
         (async () => {
-            const response = await getAllGames(page);
-            console.log(response.next);
-            console.log(nextPage);
+            const response = await getAllGames(1);
+
             setGameList(response.games);
             setNextPage(response.next);
         })();
     }, []);
 
-    useEffect(() => {
-        window.addEventListener('scroll', () => {
-            if (
-                window.innerHeight + document.documentElement.scrollTop + 1 >=
-                document.documentElement.scrollHeight
-            ) {
-                getMoreGames();
-            }
-        });
-        return () =>
-            window.removeEventListener('scroll', () => {
-                // if (
-                //     window.innerHeight + document.documentElement.scrollTop + 1 >=
-                //     document.documentElement.scrollHeight
-                // ) {
-                //     getMoreGames();
-                // }
-            });
-    }, []);
+    useEffect(() => {}, [isFetching]);
 
     return (
         <div>
+            {nextPage}
             {gameList.length === 0 ? null : (
                 <div>
                     <div className="min-h-[110vh]">
@@ -79,22 +90,46 @@ export function HomePage() {
                         <div>
                             <div className="md:flex md:flex-row md:flex-wrap">
                                 {Array.isArray(gameList)
-                                    ? gameList.map((game) => {
-                                          return (
-                                              <GameCard
-                                                  key={game.slug}
-                                                  gamename={game.name}
-                                                  gameImage={game.background_image}
-                                                  releaseDate={game.released}
-                                              />
-                                          );
+                                    ? gameList.map((game, index) => {
+                                          if (gameList.length === index + 1) {
+                                              return (
+                                                  <div
+                                                      ref={lastGameRef}
+                                                      key={`${game.slug}${index}`}
+                                                      className="rounded-xl bg-[#282727] mb-4 overflow-hidden md:max-w-[23%] md:mr-3"
+                                                  >
+                                                      <GameCard
+                                                          gamename={game.name}
+                                                          gameImage={game.background_image}
+                                                          releaseDate={game.released}
+                                                      />
+                                                  </div>
+                                              );
+                                          } else {
+                                              return (
+                                                  <div
+                                                      key={`${game.slug}${index}`}
+                                                      className="rounded-xl bg-[#282727] mb-4 overflow-hidden md:max-w-[23%] md:mr-3"
+                                                  >
+                                                      <GameCard
+                                                          gamename={game.name}
+                                                          gameImage={game.background_image}
+                                                          releaseDate={game.released}
+                                                      />
+                                                  </div>
+                                              );
+                                          }
                                       })
                                     : null}
                             </div>
                         </div>
                     </div>
 
-                    <div ref={observerRef} id="bottom" className="h-[2vh] bg-red-500"></div>
+                    {isFetching ? (
+                        <div className="w-full bg-red-500 h-[3vh]">
+                            <CircularProgress />
+                        </div>
+                    ) : null}
                 </div>
             )}
         </div>
