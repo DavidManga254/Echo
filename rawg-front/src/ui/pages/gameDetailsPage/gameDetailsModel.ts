@@ -1,18 +1,20 @@
 import { useApiManager } from '../../../API/apiManager';
-import { PageResponseInterface } from '../pageResponseInterface';
+import { GameDetailsInterface } from '../../../API/apiMethods/gamesApi/gamesApi';
 import axios from 'axios';
 
-interface GameDetailsResponseInterface {
+interface GameDetailsResponseInterface<T> {
     responseCode: number;
-    gameDetails: any;
+    gameDetails: T | null;
 }
-export async function getGameDetails(slug: string): Promise<GameDetailsResponseInterface> {
+export async function getGameDetails(
+    slug: string,
+): Promise<GameDetailsResponseInterface<GameDetailsInterface>> {
     const getGameInfo = useApiManager().getGameDetails;
 
     const response = await getGameInfo(slug);
 
     return {
         responseCode: response.status,
-        gameDetails: axios.isAxiosError(response) ? '' : response.data,
+        gameDetails: axios.isAxiosError(response) ? null : response.data.data,
     };
 }

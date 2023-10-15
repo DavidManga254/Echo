@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\game\Game;
 use App\Helpers\ApiHelper;
 use App\Http\Resources\games\GamesResource;
+use App\Http\Resources\games\GameDetailResource;
 
 class GamesController extends Controller
 {
@@ -37,9 +38,10 @@ class GamesController extends Controller
                 ->with('tags')
                 ->with('stores')
                 ->with('platforms')
+                ->with('genre')
                 ->first();
 
-            return response()->json(ApiHelper::success(data: $game));
+            return response()->json(ApiHelper::success(data: new GameDetailResource($game)));
         } catch (\Exception $e) {
             return response()->json(ApiHelper::error());
         }

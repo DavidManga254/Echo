@@ -9,7 +9,19 @@ export interface SingleGameInterface {
     slug: string;
 }
 
-export interface GameDetailsInterface {}
+export interface GameDetailsInterface {
+    name: string;
+    slug: string;
+    playtime: number;
+    released: string;
+    background_image: string;
+    rating: string;
+    screenshots: { image: string }[];
+    stores: { name: string; slug: string }[];
+    platforms: { name: string; slug: string }[];
+    genre: { name: string; slug: string }[];
+}
+
 export interface GamesInterface {
     next: string;
     data: SingleGameInterface[];
@@ -38,7 +50,9 @@ export async function getMoreGames(
     return response;
 }
 
-export async function getGameDetails(slug: string): Promise<AxiosResponse<ResponseInterface<any>>> {
+export async function getGameDetails(
+    slug: string,
+): Promise<AxiosResponse<ResponseInterface<GameDetailsInterface>>> {
     const response = apiInstance(`/games/info/${slug}`, {
         method: 'get',
     });

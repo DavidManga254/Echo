@@ -4,11 +4,23 @@ import { ShowMoreText } from '../../common/textExpand/textExpand';
 import Backdrop from '@mui/material/Backdrop';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { getGameDetails } from './gameDetailsModel';
+import { GameDetailsInterface } from '../../../API/apiMethods/gamesApi/gamesApi';
 
 export function GameDetails() {
     const [isbackDropOpen, setBackdropState] = useState(false);
     const [backDropImageUrl, setBackDropImageUrl] = useState('');
     const { gameSlug } = useParams();
+    const [gameDetails, setGameDetails] = useState<GameDetailsInterface | null>(null);
+
+    useEffect(() => {
+        (async () => {
+            const response = await getGameDetails(gameSlug as string);
+
+            setGameDetails(response.gameDetails);
+        })();
+    }, []);
 
     return (
         <div>
@@ -17,7 +29,7 @@ export function GameDetails() {
                 <div className="md:w-1/2">
                     <div>
                         <p className="sm:text-center text-xs sm:mb-4 text-gray-400">
-                            HOME/GAMES/BALDUR'S GATE III
+                            {gameDetails?.name}
                         </p>
                         <Backdrop
                             open={isbackDropOpen}
@@ -27,38 +39,29 @@ export function GameDetails() {
                         </Backdrop>
                         <div className="flex flex-row justify-center sm:mb-7 ">
                             <button className="sm:text-xs text-black bg-white rounded p-1 font-semibold">
-                                AUG 3,2023
+                                {gameDetails?.released}
                             </button>
                         </div>
                         <div className="sm:mb-5">
                             <h1 className="sm:text-center sm:text-3xl font-bold">
-                                BALDUR'S GATE III
+                                {gameDetails?.name}
                             </h1>
                         </div>
                     </div>
                     <div className="sm:flex sm:flex-row sm:flex-wrap sm:mb-5">
-                        <img
-                            onClick={() => {
-                                setBackDropImageUrl(
-                                    'https://media.rawg.io/media/resize/200/-/screenshots/a67/a676cdec0eadc42a133ac49e7f2e1aac.jpg',
-                                );
-                                setBackdropState(!isbackDropOpen);
-                            }}
-                            className="w-[48.5%] m-0.5"
-                            src="https://media.rawg.io/media/resize/200/-/screenshots/a67/a676cdec0eadc42a133ac49e7f2e1aac.jpg"
-                        />
-                        <img
-                            className="w-[48.5%] m-0.5"
-                            src="https://media.rawg.io/media/resize/200/-/screenshots/a67/a676cdec0eadc42a133ac49e7f2e1aac.jpg"
-                        />
-                        <img
-                            className="w-[48.5%] m-0.5"
-                            src="https://media.rawg.io/media/resize/200/-/screenshots/a67/a676cdec0eadc42a133ac49e7f2e1aac.jpg"
-                        />
-                        <img
-                            className="w-[48.5%] m-0.5"
-                            src="https://media.rawg.io/media/resize/200/-/screenshots/a67/a676cdec0eadc42a133ac49e7f2e1aac.jpg"
-                        />
+                        {gameDetails?.screenshots.map((imageUrl, index) => {
+                            return (
+                                <img
+                                    key={`${imageUrl.image}${index}`}
+                                    onClick={() => {
+                                        setBackDropImageUrl(imageUrl.image);
+                                        setBackdropState(!isbackDropOpen);
+                                    }}
+                                    className="w-[48.5%] m-0.5"
+                                    src={imageUrl.image}
+                                />
+                            );
+                        })}
                     </div>
                     <div className="sm:w-full">
                         <button className="sm:w-full bg-white mt-3 mb-3 rounded text-left p-1">
@@ -132,12 +135,16 @@ export function GameDetails() {
                             <div className="mb-2">
                                 <h4 className="text-[#474747] font-semibold mb-1">plartforms</h4>
                                 <div className="flex flex-wrap">
-                                    <span className="sm:text-sm underline underline-offset-1 mr-1">
-                                        mac
-                                    </span>
-                                    <span className="sm:text-sm underline underline-offset-1 mr-1">
-                                        mac
-                                    </span>
+                                    {gameDetails?.platforms.map((platform) => {
+                                        return (
+                                            <span
+                                                key={platform.slug}
+                                                className="sm:text-sm underline underline-offset-1 mr-1"
+                                            >
+                                                {platform.name}
+                                            </span>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         </div>
@@ -145,7 +152,7 @@ export function GameDetails() {
                             <div>
                                 <h4 className="text-[#474747] font-semibold mb-1">Metascore</h4>
                                 <button className=" border-green-500 p-1 text-green-500 border-solid border-2 aspect-square rounded sm:text-sm">
-                                    97
+                                    {gameDetails?.rating}
                                 </button>
                             </div>
                         </div>
