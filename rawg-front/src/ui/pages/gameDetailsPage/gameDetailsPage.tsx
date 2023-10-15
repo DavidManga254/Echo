@@ -3,10 +3,13 @@ import ModeCommentRoundedIcon from '@mui/icons-material/ModeCommentRounded';
 import { ShowMoreText } from '../../common/textExpand/textExpand';
 import Backdrop from '@mui/material/Backdrop';
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 export function GameDetails() {
     const [isbackDropOpen, setBackdropState] = useState(false);
     const [backDropImageUrl, setBackDropImageUrl] = useState('');
+    const { gameSlug } = useParams();
+
     return (
         <div>
             <div className="md:flex md:flex-row">
@@ -18,14 +21,9 @@ export function GameDetails() {
                         </p>
                         <Backdrop
                             open={isbackDropOpen}
-                            onClick={() =>
-                                setBackdropState(!isbackDropOpen)
-                            }
+                            onClick={() => setBackdropState(!isbackDropOpen)}
                         >
-                            <img
-                                className="w-[70%]"
-                                src={backDropImageUrl}
-                            />
+                            <img className="w-[70%]" src={backDropImageUrl} />
                         </Backdrop>
                         <div className="flex flex-row justify-center sm:mb-7 ">
                             <button className="sm:text-xs text-black bg-white rounded p-1 font-semibold">
@@ -64,17 +62,11 @@ export function GameDetails() {
                     </div>
                     <div className="sm:w-full">
                         <button className="sm:w-full bg-white mt-3 mb-3 rounded text-left p-1">
-                            <span className="sm:text-xs text-gray-500">
-                                Add to
-                            </span>
+                            <span className="sm:text-xs text-gray-500">Add to</span>
                             <br />
-                            <span className="text-black sm:text-">
-                                My games
-                            </span>
+                            <span className="text-black sm:text-">My games</span>
                         </button>
-                        <p className=" text-gray-500 text-center sm:text-sm">
-                            Last modified{' '}
-                        </p>
+                        <p className=" text-gray-500 text-center sm:text-sm">Last modified </p>
                     </div>
                     <div className="mt-3 mb-3">
                         <button className="bg-[#323131] sm:w-full p-2 rounded text-gray-500 sm:text-sm">
@@ -138,9 +130,7 @@ export function GameDetails() {
                     <div className="flex flex-row justify-between mt-4">
                         <div className="w-1/2">
                             <div className="mb-2">
-                                <h4 className="text-[#474747] font-semibold mb-1">
-                                    plartforms
-                                </h4>
+                                <h4 className="text-[#474747] font-semibold mb-1">plartforms</h4>
                                 <div className="flex flex-wrap">
                                     <span className="sm:text-sm underline underline-offset-1 mr-1">
                                         mac
@@ -153,9 +143,7 @@ export function GameDetails() {
                         </div>
                         <div className="w-1/2">
                             <div>
-                                <h4 className="text-[#474747] font-semibold mb-1">
-                                    Metascore
-                                </h4>
+                                <h4 className="text-[#474747] font-semibold mb-1">Metascore</h4>
                                 <button className=" border-green-500 p-1 text-green-500 border-solid border-2 aspect-square rounded sm:text-sm">
                                     97
                                 </button>
@@ -163,9 +151,7 @@ export function GameDetails() {
                         </div>
                     </div>
                     <div className="mt-3">
-                        <h3 className="text-[#474747] font-semibold mb-1">
-                            Tags
-                        </h3>
+                        <h3 className="text-[#474747] font-semibold mb-1">Tags</h3>
                     </div>
                 </div>
                 <div>
@@ -179,17 +165,15 @@ export function GameDetails() {
             </div>
             <div>
                 <div>
-                    <h2 className="text-center sm:mb-3 lg:mb-6">
-                        More games like
-                    </h2>
+                    <h2 className="text-center sm:mb-3 lg:mb-6">More games like</h2>
                     <div className="md:flex md:flex-wrap md:flex-row">
+                        {/* <GameCard />
                         <GameCard />
                         <GameCard />
                         <GameCard />
                         <GameCard />
                         <GameCard />
-                        <GameCard />
-                        <GameCard />
+                        <GameCard /> */}
                     </div>
                 </div>
             </div>

@@ -606,32 +606,16 @@ video {
   display: contents;
 }
 
-.aspect-square {
-  aspect-ratio: 1 / 1;
-}
-
-.aspect-\[16\/9\] {
-  aspect-ratio: 16/9;
-}
-
-.aspect-\[16\/30\] {
-  aspect-ratio: 16/30;
-}
-
-.aspect-\[16\/20\] {
-  aspect-ratio: 16/20;
-}
-
-.aspect-\[16\/16\] {
-  aspect-ratio: 16/16;
-}
-
 .aspect-\[16\/10\] {
   aspect-ratio: 16/10;
 }
 
-.h-\[2vh\] {
-  height: 2vh;
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.h-\[3vh\] {
+  height: 3vh;
 }
 
 .h-full {
@@ -640,10 +624,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-\[3vh\] {
-  height: 3vh;
 }
 
 .min-h-\[110vh\] {

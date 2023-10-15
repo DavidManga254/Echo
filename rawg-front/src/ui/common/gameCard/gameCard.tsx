@@ -4,6 +4,7 @@ import Collapse from '@mui/material/Collapse';
 import { TransitionGroup } from 'react-transition-group';
 import { useState } from 'react';
 import Divider from '@mui/material/Divider';
+import { useNavigate } from 'react-router-dom';
 
 export function GameCard(props: {
     gamename: string;
@@ -11,17 +12,33 @@ export function GameCard(props: {
     // platforms: string[];
     releaseDate: string;
     // genre: string;
+    slug: string;
 }) {
+    const navigate = useNavigate();
     const [display, setDisplay] = useState(false);
+
+    function navigateToDetails() {
+        navigate(`games/${props.slug}`);
+    }
 
     return (
         <div className="w-full">
             <div className="w-full">
-                <img loading="lazy" className="w-full aspect-[16/10]" src={props.gameImage} />
+                <img
+                    onClick={navigateToDetails}
+                    loading="lazy"
+                    className="w-full aspect-[16/10]"
+                    src={props.gameImage}
+                />
             </div>
             <div className="p-2">
                 <div className="mb-2">
-                    <h2 className="fon font-bold sm:text-2xl md:text-base">{props.gamename}</h2>
+                    <h2
+                        onClick={navigateToDetails}
+                        className="fon font-bold sm:text-2xl md:text-base"
+                    >
+                        {props.gamename}
+                    </h2>
                 </div>
                 <div className="mb-2">
                     <button className="bg-[#414040] sm:text-sm p-1 rounded mr-2">

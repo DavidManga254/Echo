@@ -67,7 +67,6 @@ export function HomePage() {
 
     return (
         <div>
-            {nextPage}
             {gameList.length === 0 ? null : (
                 <div>
                     <div className="min-h-[110vh]">
@@ -99,6 +98,7 @@ export function HomePage() {
                                                       className="rounded-xl bg-[#282727] mb-4 overflow-hidden md:max-w-[23%] md:mr-3"
                                                   >
                                                       <GameCard
+                                                          slug={game.slug}
                                                           gamename={game.name}
                                                           gameImage={game.background_image}
                                                           releaseDate={game.released}
@@ -112,6 +112,7 @@ export function HomePage() {
                                                       className="rounded-xl bg-[#282727] mb-4 overflow-hidden md:max-w-[23%] md:mr-3"
                                                   >
                                                       <GameCard
+                                                          slug={game.slug}
                                                           gamename={game.name}
                                                           gameImage={game.background_image}
                                                           releaseDate={game.released}

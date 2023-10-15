@@ -8,6 +8,8 @@ export interface SingleGameInterface {
     released: string;
     slug: string;
 }
+
+export interface GameDetailsInterface {}
 export interface GamesInterface {
     next: string;
     data: SingleGameInterface[];
@@ -30,6 +32,14 @@ export async function getMoreGames(
     next: string,
 ): Promise<AxiosResponse<ResponseInterface<GamesInterface>>> {
     const response = apiInstance(`/${next}`, {
+        method: 'get',
+    });
+
+    return response;
+}
+
+export async function getGameDetails(slug: string): Promise<AxiosResponse<ResponseInterface<any>>> {
+    const response = apiInstance(`/games/info/${slug}`, {
         method: 'get',
     });
 
