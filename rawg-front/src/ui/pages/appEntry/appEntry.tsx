@@ -7,20 +7,25 @@ import { MyContext } from '../../../router/router';
 export function AppEntry() {
     const context = useContext(MyContext);
     return (
-        <div
-            className="w-screen min-h-screen"
-            style={{
-                backgroundImage: `linear-gradient(to bottom, transparent 10%, rgba(0, 0, 0 )),${
-                    context.url === '' ? null : `url(${context.url})`
-                }`,
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: '100% 40%',
-                backgroundColor: 'black',
-                transition: 'background-size 0.5s ease', // Add a smooth transition
-            }}
-        >
+        <div className="w-screen bg-black " style={{ position: 'relative' }}>
             <div
-                className={`font-sans min-h-screen  text-white p-5 ${
+                className="sm:min-h-[40vh] md:min-h-[80vh] min-w-[100vw]"
+                style={{
+                    position: 'absolute',
+                    top: '0',
+                    left: '0',
+                    backgroundImage: `linear-gradient(to bottom, transparent 10%, rgba(0, 0, 0 ) 100%),${
+                        context.url === '' ? null : `url(${context.url})`
+                    }`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: '100% 100%',
+                    backgroundColor: 'black',
+                    transition: 'background-size 0.5s ease', // Add a smooth transition
+                }}
+            ></div>
+            <div
+                style={{ zIndex: '3000' }}
+                className={`font-sans min-h-screen z-50 relative text-white p-5 ${
                     context.url === '' ? 'bg-[rgb(21,21,21)]' : 'bg-[rgb(21,21,21)] bg-opacity-50'
                 }`}
             >
@@ -31,9 +36,6 @@ export function AppEntry() {
                     <div className=" w-[15%] sm:hidden lg:inline-block">
                         <SideBar />
                     </div>
-                    {/* <div className="bg-blue-600 p-3">
-                    <Outlet />
-                </div> */}
                     <div className="lg:w-[85%] lg:p-3">
                         <Outlet />
                     </div>
