@@ -1,4 +1,4 @@
-# RAWG CLONE
+# Echo
 This project is clone of [rawg website](https://rawg.io)
 The project runs on a **laravel backend** and **React frontend**
 
