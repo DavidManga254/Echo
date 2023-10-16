@@ -6,6 +6,19 @@ import { LandingPage } from '../ui/pages/landing/landingPage';
 import { SignUpPage } from '../ui/pages/signUpPage/signUpPage';
 import { LoginPage } from '../ui/pages/loginPage/loginPage';
 import { ConfirmEmailPage } from '../ui/pages/confirmEmailPage/confirmEmailPage';
+import { createContext, useState } from 'react';
+
+export const MyContext = createContext<any | null>(null);
+
+function MyContextProvider(props: { children: any }) {
+    const [url, setValue] = useState<string>('');
+
+    const updateValue = (newValue: string) => {
+        setValue(newValue);
+    };
+
+    return <MyContext.Provider value={{ url, updateValue }}>{props.children}</MyContext.Provider>;
+}
 const router = createBrowserRouter([
     {
         path: '/',
@@ -25,7 +38,11 @@ const router = createBrowserRouter([
     },
     {
         path: 'home/',
-        element: <AppEntry />,
+        element: (
+            <MyContextProvider>
+                <AppEntry />
+            </MyContextProvider>
+        ),
         children: [
             {
                 path: '',

@@ -7,23 +7,38 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { getGameDetails } from './gameDetailsModel';
 import { GameDetailsInterface } from '../../../API/apiMethods/gamesApi/gamesApi';
+import { useContext } from 'react';
+import { MyContext } from '../../../router/router';
 
 export function GameDetails() {
     const [isbackDropOpen, setBackdropState] = useState(false);
     const [backDropImageUrl, setBackDropImageUrl] = useState('');
     const { gameSlug } = useParams();
     const [gameDetails, setGameDetails] = useState<GameDetailsInterface | null>(null);
+    const urlContext = useContext(MyContext);
 
     useEffect(() => {
         (async () => {
             const response = await getGameDetails(gameSlug as string);
 
             setGameDetails(response.gameDetails);
+
+            urlContext.updateValue(response.gameDetails?.screenshots[0].image);
         })();
+
+        window.addEventListener('beforeunload', () => {
+            {
+                urlContext.updateValue('');
+            }
+        });
+
+        return () => {
+            urlContext.updateValue('');
+        };
     }, []);
 
     return (
-        <div>
+        <div className="">
             <div className="md:flex md:flex-row">
                 {/* first column */}
                 <div className="md:w-1/2">
@@ -48,7 +63,7 @@ export function GameDetails() {
                             </h1>
                         </div>
                     </div>
-                    <div className="sm:flex sm:flex-row sm:flex-wrap sm:mb-5">
+                    <div className="sm:flex sm:flex-row md:flex-wrap sm:mb-5 w-full overflow-x-scroll">
                         {gameDetails?.screenshots.map((imageUrl, index) => {
                             return (
                                 <img
@@ -57,7 +72,7 @@ export function GameDetails() {
                                         setBackDropImageUrl(imageUrl.image);
                                         setBackdropState(!isbackDropOpen);
                                     }}
-                                    className="w-[48.5%] m-0.5"
+                                    className="md:w-[48.5%] sm:w-[55%] aspect-[16/10] m-0.5"
                                     src={imageUrl.image}
                                 />
                             );
