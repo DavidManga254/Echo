@@ -14,12 +14,13 @@ export function SearchResultsPage() {
 
     useEffect(() => {
         (async () => {
+            setsearchResuls(null);
             const response = await searchGame(searchQuery as string);
             const searchResultsResponse = response.data?.length === 0 ? [] : response.data;
 
             setsearchResuls(searchResultsResponse);
         })();
-    }, []);
+    }, [searchQuery]);
 
     return (
         <div>

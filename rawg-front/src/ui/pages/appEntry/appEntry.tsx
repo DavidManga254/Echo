@@ -24,8 +24,8 @@ export function AppEntry() {
                 }}
             ></div>
             <div
-                style={{ zIndex: '3000' }}
-                className={`font-sans min-h-screen z-50 relative text-white p-5 ${
+                // style={{ zIndex: '3000' }}
+                className={`font-sans min-h-screen relative text-white p-5 ${
                     context.url === '' ? 'bg-[rgb(21,21,21)]' : 'bg-[rgb(21,21,21)] bg-opacity-50'
                 }`}
             >
@@ -33,7 +33,7 @@ export function AppEntry() {
                     <TopAppBar />
                 </div>
                 <div className="lg:flex lg:flex-row w-full">
-                    <div className=" w-[15%] sm:hidden lg:inline-block">
+                    <div className=" w-[15%] sm:hidden lg:inline-block" style={{ zIndex: '4000' }}>
                         <SideBar />
                     </div>
                     <div className="lg:w-[85%] lg:p-3">

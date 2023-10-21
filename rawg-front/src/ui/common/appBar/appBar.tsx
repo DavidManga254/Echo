@@ -29,7 +29,7 @@ export function TopAppBar() {
                     <input
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder={appConstants.search_games_placeHolder}
-                        className="w-full bg-gray-200 rounded-3xl p-2 sm:p-1 focus:bg-white border-0"
+                        className="w-full bg-gray-200 text-black rounded-3xl p-2 sm:p-1 focus:bg-white border-0"
                         type="text"
                     />
                 </form>
