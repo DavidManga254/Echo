@@ -59,3 +59,13 @@ export async function getGameDetails(
 
     return response;
 }
+
+export async function searchGames(
+    query: string,
+): Promise<AxiosResponse<ResponseInterface<SingleGameInterface[]>>> {
+    const response = apiInstance(`/games/search/${query}`, {
+        method: 'get',
+    });
+
+    return response;
+}

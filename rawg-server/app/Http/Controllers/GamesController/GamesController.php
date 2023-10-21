@@ -73,7 +73,6 @@ class GamesController extends Controller
 
             return response()->json(ApiHelper::success(data: GamesResource::collection($games->items())));
         } catch (\Exception $e) {
-            dd($e);
             return response()->json(ApiHelper::error(message: config('apierrormessages.platform_not_exist')), 404);
         }
     }

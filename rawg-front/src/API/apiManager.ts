@@ -3,6 +3,8 @@ import { getLoginStatus } from './apiMethods/userApi/checkAuth';
 import { getGames } from './apiMethods/gamesApi/gamesApi';
 import { getMoreGames } from './apiMethods/gamesApi/gamesApi';
 import { getGameDetails } from './apiMethods/gamesApi/gamesApi';
+import { searchGames } from './apiMethods/gamesApi/gamesApi';
+
 const useApiManager = () => {
     return {
         signUp,
@@ -12,6 +14,7 @@ const useApiManager = () => {
         getGames,
         getMoreGames,
         getGameDetails,
+        searchGames,
     };
 };
 

@@ -18,7 +18,7 @@ export function GameCard(props: {
     const [display, setDisplay] = useState(false);
 
     function navigateToDetails() {
-        navigate(`games/${props.slug}`);
+        navigate(`/home/games/${props.slug}`);
     }
 
     return (
