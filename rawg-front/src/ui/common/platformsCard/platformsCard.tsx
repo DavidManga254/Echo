@@ -1,11 +1,5 @@
-import AddIcon from '@mui/icons-material/Add';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import Collapse from '@mui/material/Collapse';
-import { TransitionGroup } from 'react-transition-group';
-import { useState } from 'react';
 import Divider from '@mui/material/Divider';
 import { useNavigate } from 'react-router-dom';
-import { PlatformInterface } from '../../../API/apiMethods/platformsApi/platformsApi';
 
 export function PlatformCard(props: {
     platformName: string;
@@ -14,11 +8,6 @@ export function PlatformCard(props: {
     top_3_games: any[];
 }) {
     const navigate = useNavigate();
-    const [display, setDisplay] = useState(false);
-
-    // function navigateToDetails() {
-    //     navigate(`/home/games/${props.slug}`);
-    // }
 
     return (
         <div
@@ -28,6 +17,7 @@ export function PlatformCard(props: {
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: '100% 100%',
             }}
+            onClick={() => navigate(`/home/platforms/${props.platformSlug}`)}
         >
             <div className="p-4 bg-black bg-opacity-60 ">
                 <div className=" mb-20">
@@ -44,7 +34,7 @@ export function PlatformCard(props: {
                     <div>
                         {props.top_3_games.map((game, index) => {
                             return (
-                                <div className="flex flex-row justify-between mb-1">
+                                <div key={index} className="flex flex-row justify-between mb-1">
                                     <div className="underline underline-offset-2 text-sm">
                                         {game.name}{' '}
                                     </div>

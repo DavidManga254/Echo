@@ -53,11 +53,22 @@ class PlatformController extends Controller
                         ->inRandomOrder();
                     break;
             }
+            $page = $page + 1;
+
+
 
 
             $games = $games->paginate(config('pagination.per_page'), ['*'], 'page', $page);
+            $gameListData = $games->items();
 
-            return response()->json(ApiHelper::success(data: GamesResource::collection($games->items())));
+            if (!empty($gameListData)) {
+                return response()->json(ApiHelper::success(data: [
+                    "next" => "/platform/$platformSlug?=page$page",
+                    "data" => GamesResource::collection($gameListData)
+                ]));
+            } else {
+                return response()->json(ApiHelper::success(data: []));
+            }
         } catch (\Exception $e) {
             return response()->json(ApiHelper::error(message: config('apierrormessages.platform_not_exist')), 404);
         }

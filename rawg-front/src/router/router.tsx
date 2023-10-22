@@ -9,6 +9,7 @@ import { ConfirmEmailPage } from '../ui/pages/confirmEmailPage/confirmEmailPage'
 import { createContext, useState } from 'react';
 import { SearchResultsPage } from '../ui/pages/searchResultsPage/searchResults';
 import { PlatformsPage } from '../ui/pages/platformPage/platformPage';
+import { PlatformsDetailsPage } from '../ui/pages/platformsDetailsPage/platfromsDetailsPage';
 
 export const MyContext = createContext<any | null>(null);
 
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
             {
                 path: 'platforms/',
                 element: <PlatformsPage />,
+            },
+            {
+                path: 'platforms/:platformSlug',
+                element: <PlatformsDetailsPage />,
             },
         ],
     },
