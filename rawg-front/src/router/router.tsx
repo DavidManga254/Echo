@@ -8,6 +8,8 @@ import { LoginPage } from '../ui/pages/loginPage/loginPage';
 import { ConfirmEmailPage } from '../ui/pages/confirmEmailPage/confirmEmailPage';
 import { createContext, useState } from 'react';
 import { SearchResultsPage } from '../ui/pages/searchResultsPage/searchResults';
+import { PlatformsPage } from '../ui/pages/platformPage/platformPage';
+
 export const MyContext = createContext<any | null>(null);
 
 function MyContextProvider(props: { children: any }) {
@@ -55,6 +57,10 @@ const router = createBrowserRouter([
             {
                 path: 'search/',
                 element: <SearchResultsPage />,
+            },
+            {
+                path: 'platforms/',
+                element: <PlatformsPage />,
             },
         ],
     },

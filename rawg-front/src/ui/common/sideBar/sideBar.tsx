@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 export function SideBar() {
+    const navigate = useNavigate();
     return (
         <div className="w-full sm:h-screen sm:overflow-y-scroll lg:pl-2 pt-4 lg:h-auto lg:overflow-auto text-white">
             <div className="mt mb-3 font-semibold sm:text-xl font-sans lg:text-3xl lg:font-bold">
@@ -14,24 +16,21 @@ export function SideBar() {
                     </div>
                     <div className="font-sans mb-2">This week</div>
                     <div className="font-sans mb-2">Next week</div>
-                    <div className="font-sans mb-2">
-                        Release Calendar
-                    </div>
+                    <div className="font-sans mb-2">Release Calendar</div>
                 </div>
             </div>
             <div className="mb-3 lg:mb-5">
-                <div className="mt mb-3 font-semibold sm:text-xl font-sans lg:text-3xl lg:font-bold">
+                <div
+                    onClick={() => navigate('/home/platforms')}
+                    className="mt mb-3 font-semibold sm:text-xl font-sans lg:text-3xl lg:font-bold"
+                >
                     Platforms
                 </div>
                 <div className="pl-2">
                     <div className="font-sans mb-2">PC</div>
-                    <div className="font-sans mb-2">
-                        Play Station 4
-                    </div>
+                    <div className="font-sans mb-2">Play Station 4</div>
                     <div className="font-sans mb-2">Xbox one</div>
-                    <div className="font-sans mb-2">
-                        Release Calendar
-                    </div>
+                    <div className="font-sans mb-2">Release Calendar</div>
                 </div>
             </div>
             <div className="mb-3">

@@ -6,10 +6,14 @@ export interface PlatformInterface {
     name: string;
     slug: string;
     background_image: string;
-    top_3_games: [];
+    top_3_games: {
+        name: string;
+        released: string;
+        pivot: {};
+    }[];
 }
 export async function getAllPlatforms(): Promise<
-    AxiosResponse<ResponseInterface<PlatformInterface>>
+    AxiosResponse<ResponseInterface<PlatformInterface[]>>
 > {
     const response = await apiInstance('/platform', {
         method: 'get',
