@@ -4,7 +4,7 @@ import { getGames } from './apiMethods/gamesApi/gamesApi';
 import { getMoreGames } from './apiMethods/gamesApi/gamesApi';
 import { getGameDetails } from './apiMethods/gamesApi/gamesApi';
 import { searchGames } from './apiMethods/gamesApi/gamesApi';
-
+import { getAllPlatforms } from './apiMethods/platformsApi/platformsApi';
 const useApiManager = () => {
     return {
         signUp,
@@ -15,6 +15,7 @@ const useApiManager = () => {
         getMoreGames,
         getGameDetails,
         searchGames,
+        getAllPlatforms,
     };
 };
 
