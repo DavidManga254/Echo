@@ -14,9 +14,15 @@ export function SideBar() {
                     <div className="font-sans mb-2 lg:text-xl lg:font-semibold text-gray-300">
                         Last 30 days
                     </div>
-                    <div className="font-sans mb-2">This week</div>
-                    <div className="font-sans mb-2">Next week</div>
-                    <div className="font-sans mb-2">Release Calendar</div>
+                    <div className="font-sans mb-2 hover:cursor-pointer hover:text-blue-500">
+                        This week
+                    </div>
+                    <div className="font-sans mb-2 hover:cursor-pointer hover:text-blue-500">
+                        Next week
+                    </div>
+                    <div className="font-sans mb-2 hover:cursor-pointer hover:text-blue-500">
+                        Release Calendar
+                    </div>
                 </div>
             </div>
             <div className="mb-3 lg:mb-5">
@@ -27,10 +33,18 @@ export function SideBar() {
                     Platforms
                 </div>
                 <div className="pl-2">
-                    <div className="font-sans mb-2">PC</div>
-                    <div className="font-sans mb-2">Play Station 4</div>
-                    <div className="font-sans mb-2">Xbox one</div>
-                    <div className="font-sans mb-2">Release Calendar</div>
+                    <div className="font-sans mb-2 hover:cursor-pointer hover:text-blue-500">
+                        PC
+                    </div>
+                    <div className="font-sans mb-2 hover:cursor-pointer hover:text-blue-500">
+                        Play Station 4
+                    </div>
+                    <div className="font-sans mb-2 hover:cursor-pointer hover:text-blue-500">
+                        Xbox one
+                    </div>
+                    <div className="font-sans mb-2 hover:cursor-pointer hover:text-blue-500">
+                        More+
+                    </div>
                 </div>
             </div>
             <div className="mb-3">
@@ -38,9 +52,15 @@ export function SideBar() {
                     Genres
                 </div>
                 <div className="pl-2">
-                    <div className="font-sans mb-2">Action</div>
-                    <div className="font-sans mb-2">Strategy</div>
-                    <div className="font-sans mb-2">RPG</div>
+                    <div className="font-sans mb-2 hover:cursor-pointer hover:text-blue-500">
+                        Action
+                    </div>
+                    <div className="font-sans mb-2 hover:cursor-pointer hover:text-blue-500">
+                        Strategy
+                    </div>
+                    <div className="font-sans mb-2 hover:cursor-pointer hover:text-blue-500">
+                        RPG
+                    </div>
                 </div>
             </div>
         </div>

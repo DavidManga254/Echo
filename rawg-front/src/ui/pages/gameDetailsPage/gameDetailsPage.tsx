@@ -9,13 +9,14 @@ import { getGameDetails } from './gameDetailsModel';
 import { GameDetailsInterface } from '../../../API/apiMethods/gamesApi/gamesApi';
 import { useContext } from 'react';
 import { MyContext } from '../../../router/router';
-
+import { useNavigate } from 'react-router-dom';
 export function GameDetails() {
     const [isbackDropOpen, setBackdropState] = useState(false);
     const [backDropImageUrl, setBackDropImageUrl] = useState('');
     const { gameSlug } = useParams();
     const [gameDetails, setGameDetails] = useState<GameDetailsInterface | null>(null);
     const urlContext = useContext(MyContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         (async () => {
@@ -131,6 +132,9 @@ export function GameDetails() {
                                         return (
                                             <span
                                                 key={platform.slug}
+                                                onClick={() =>
+                                                    navigate(`/home/platforms/${platform.slug}`)
+                                                }
                                                 className="sm:text-sm underline underline-offset-1 mr-1"
                                             >
                                                 {platform.name}
