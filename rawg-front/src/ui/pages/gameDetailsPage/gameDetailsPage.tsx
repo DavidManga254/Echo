@@ -1,6 +1,4 @@
-import { GameCard } from '../../common/gameCard/gameCard';
 import ModeCommentRoundedIcon from '@mui/icons-material/ModeCommentRounded';
-import { ShowMoreText } from '../../common/textExpand/textExpand';
 import Backdrop from '@mui/material/Backdrop';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';

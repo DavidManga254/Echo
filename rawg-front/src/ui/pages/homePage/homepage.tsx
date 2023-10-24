@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 export function HomePage() {
     const [orderCriteria, setOrderCriteria] = useState('name');
-    const observerRef = useRef<HTMLDivElement | null>(null);
+    // const observerRef = useRef<HTMLDivElement | null>(null);
     const [isFetching, setIsFetching] = useState(false);
 
     const [gameList, setGameList] = useState<SingleGameInterface[]>([]);
@@ -16,6 +16,7 @@ export function HomePage() {
     const observer = useRef<any>();
 
     const nextPageRef = useRef(nextPage);
+    setOrderCriteria('helo');
     const gameListRef = useRef(gameList);
 
     async function getMoreGames() {
