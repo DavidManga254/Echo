@@ -33,7 +33,10 @@ export function AppEntry() {
                     <TopAppBar />
                 </div>
                 <div className="lg:flex lg:flex-row w-full">
-                    <div className=" w-[15%] sm:hidden lg:inline-block" style={{ zIndex: '4000' }}>
+                    <div
+                        className=" w-[15%] sm:hidden lg:inline-block lg:h-fit sticky top-0"
+                        style={{ zIndex: '4000' }}
+                    >
                         <SideBar />
                     </div>
                     <div className="lg:w-[85%] lg:p-3">
