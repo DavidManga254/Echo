@@ -9,7 +9,7 @@ export function PlatformsDetailsPage() {
     const { platformSlug } = useParams();
 
     const [orderCriteria, setOrderCriteria] = useState('name');
-    const observerRef = useRef<HTMLDivElement | null>(null);
+    // const observerRef = useRef<HTMLDivElement | null>(null);
     const [isFetching, setIsFetching] = useState(false);
 
     const [gameList, setGameList] = useState<SingleGameInterface[]>([]);
@@ -19,6 +19,7 @@ export function PlatformsDetailsPage() {
 
     const nextPageRef = useRef(nextPage);
     const gameListRef = useRef(gameList);
+    setOrderCriteria('name');
 
     async function getMoreGames() {
         const response = await getNextPageByPlatform(nextPageRef.current);

@@ -1,7 +1,7 @@
 import { apiInstance } from '../../apiConfiguration';
 import { AxiosResponse } from 'axios';
 import { ResponseInterface } from '../../responseInterface';
-import { GamesInterface, SingleGameInterface } from '../gamesApi/gamesApi';
+import { GamesInterface } from '../gamesApi/gamesApi';
 
 export interface PlatformInterface {
     name: string;

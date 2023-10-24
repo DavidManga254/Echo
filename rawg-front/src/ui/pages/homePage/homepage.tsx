@@ -16,7 +16,7 @@ export function HomePage() {
     const observer = useRef<any>();
 
     const nextPageRef = useRef(nextPage);
-    setOrderCriteria('helo');
+    setOrderCriteria('name');
     const gameListRef = useRef(gameList);
 
     async function getMoreGames() {

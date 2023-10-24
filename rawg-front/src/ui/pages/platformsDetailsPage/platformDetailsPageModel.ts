@@ -1,5 +1,4 @@
 import { useApiManager } from '../../../API/apiManager';
-import { PageResponseInterface } from '../pageResponseInterface';
 import { SingleGameInterface } from '../../../API/apiMethods/gamesApi/gamesApi';
 import axios from 'axios';
 interface GamePageInterface {
