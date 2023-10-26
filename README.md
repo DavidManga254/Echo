@@ -6,7 +6,7 @@ The project runs on a **laravel backend** and **React frontend**
 ### 1. Clone the project
 In your desired folder from the terminal run <br>
 ```
-git clone https://github.com/DavidManga254/rawg-clone.git
+git clone https://github.com/DavidManga254/Echo.git
 ```
 ### 2. Install frontend node modules
 navigate to rawg front using<br>
