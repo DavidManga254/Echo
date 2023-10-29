@@ -16,7 +16,7 @@ class CheckAuthController extends Controller
     {
 
         try {
-            $token = $_COOKIE[env('APP_COOKIE_NAME')];
+            $token = $_COOKIE[env('APP_COOKIE_NAME')] ?? $request->input('APP_JWT');
 
             if ($token === null) {
                 return response()->json(ApiHelper::success(), 403);

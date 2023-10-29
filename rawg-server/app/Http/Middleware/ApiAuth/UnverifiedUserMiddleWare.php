@@ -19,7 +19,7 @@ class UnverifiedUserMiddleWare
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $cookie = $request()->cookie(env('APP_COOKIE'));
+        $cookie = $request()->cookie(env('APP_COOKIE')) ?? $request->input('APP_JWT');
 
         dd($cookie);
         return $token = $request->bearerToken();
