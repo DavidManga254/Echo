@@ -15,7 +15,6 @@ cd rawg-front
 ```
 
 install the packages using
-
 ```
 npm install
 ```
