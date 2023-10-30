@@ -16,7 +16,7 @@ cd rawg-front
 
 install the packages using
 ```
-npm install
+npm install  
 ```
 ### 3. start the frontend
 To start the frontend server run 
