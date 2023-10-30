@@ -11,7 +11,7 @@ git clone https://github.com/DavidManga254/Echo.git
 ### 2. Install frontend node modules
 navigate to rawg front using<br>
 ```
-cd rawg-front         
+cd rawg-front
 ```
 
 install the packages using
